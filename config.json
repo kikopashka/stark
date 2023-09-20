@@ -1,0 +1,155 @@
+{ 
+    "tokens" : {
+        "tokensAbi" : "0x048624e084dc68d82076582219c7ed8cb0910c01746cca3cd72a28ecfe07e42d",
+        "ETH" : "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+        "DAI" : "0x00da114221cb83fa859dbdb4c44beeaa0bb37c7537ad5ae66fe5e0efd20e6eb3",
+        "USDC" : "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8",
+        "USDT" : "0x068f5c6a61780768455de69077e07e89787839bf8166decfbf92b645209c0fb8",
+        "WBTC" : "0x03fe2b97c1fd336e750087d68b9b867997fd64a2661ff3ca5a7c771641e8e7ac"
+
+},
+
+
+    "rpc" : {
+        "arbitrum" : "https://1rpc.io/arb",
+        "optimism" : "https://optimism-mainnet.public.blastapi.io",
+        "ethereum" : "https://eth.llamarpc.com" 
+
+    },
+
+    "starkgate" : {
+        "address" : "0xae0Ee0A63A2cE6BaeEFFE56e7714FB4EFE48D419"
+    },
+
+
+    "decimals" : {
+        "ETH"  : 18,
+        "DAI"  : 18,
+        "USDC"  : 6,
+        "USDT"  : 6,
+        "WBTC"  : 8 
+
+    },
+
+    "argent" : {
+        "argentXproxyClassHash" : "0x25ec026985a3bf9d0cc1fe17326b245dfdc3ff89b8fde106542a3ea56c5a918",
+        "argentXaccountClassHash" : "0x033434ad846cdd5f23eb73ff09fe6fddd568284a0fb7d1be20ee482f044dabe2",
+        "argentXaccountClassHashNew" : "0x1a736d6ed154502257f02b1ccdf4d9d1089f80811cd6acad48e6b6a9d1f2003"
+    },
+
+
+    "jediswap" : {
+        "routerAddress": "0x041fd22b238fa21cfcf5dd45a8548974d8263b3a531a60388411c5e230f97023",
+        "pairsPool": {
+            "ETHUSDC": "0x04d0390b777b424e43839cd1e744799f3de6c176c7e32c1812a41dbd9c19db6a",
+            "USDCETH": "0x04d0390b777b424e43839cd1e744799f3de6c176c7e32c1812a41dbd9c19db6a",
+            "ETHUSDT": "0x045e7131d776dddc137e30bdd490b431c7144677e97bf9369f629ed8d3fb7dd6",
+            "USDTETH": "0x045e7131d776dddc137e30bdd490b431c7144677e97bf9369f629ed8d3fb7dd6",
+            "DAIETH": "0x07e2a13b40fc1119ec55e0bcf9428eedaa581ab3c924561ad4e955f95da63138",
+            "ETHDAI": "0x07e2a13b40fc1119ec55e0bcf9428eedaa581ab3c924561ad4e955f95da63138",
+            "DAIUSDC": "0x00cfd39f5244f7b617418c018204a8a9f9a7f72e71f0ef38f968eeb2a9ca302b",
+            "USDCDAI": "0x00cfd39f5244f7b617418c018204a8a9f9a7f72e71f0ef38f968eeb2a9ca302b",
+            "DAIUSDT": "0x00f0f5b3eed258344152e1f17baf84a2e1b621cd754b625bec169e8595aea767",
+            "USDTDAI": "0x00f0f5b3eed258344152e1f17baf84a2e1b621cd754b625bec169e8595aea767",
+            "USDCUSDT": "0x05801bdad32f343035fb242e98d1e9371ae85bc1543962fedea16c59b35bd19b",
+            "USDTUSDC": "0x05801bdad32f343035fb242e98d1e9371ae85bc1543962fedea16c59b35bd19b",
+            "WBTCETH": "0x0260e98362e0949fefff8b4de85367c035e44f734c9f8069b6ce2075ae86b45c",
+            "ETHWBTC": "0x0260e98362e0949fefff8b4de85367c035e44f734c9f8069b6ce2075ae86b45c"
+
+
+        }
+    },
+
+    "myswap" : {
+        "routerAddress": "0x010884171baf1914edc28d7afb619b40a4051cfae78a094a55d230f19e944a28",
+        "poolId": {
+            "ETHUSDC": "1",
+            "USDCETH": "1",
+            "DAIETH": "2",
+            "ETHDAI": "2",
+            "ETHUSDT": "4",
+            "USDTETH": "4",
+            "USDCUSDT": "5",
+            "USDTUSDC": "5",
+            "DAIUSDC": "6",
+            "USDCDAI": "6"
+            }
+        },
+
+        "kswap" : {
+            "routerAddress": "0x07a6f98c03379b9513ca84cca1373ff452a7462a3b61598f0af5bb27ad7f76d1",
+            "pairsPool":{
+                "ETHUSDC": "0x000023c72abdf49dffc85ae3ede714f2168ad384cc67d08524732acea90df325",
+                "USDCETH": "0x000023c72abdf49dffc85ae3ede714f2168ad384cc67d08524732acea90df325",
+                "ETHUSDT": "0x05900cfa2b50d53b097cb305d54e249e31f24f881885aae5639b0cd6af4ed298",
+                "USDTETH": "0x05900cfa2b50d53b097cb305d54e249e31f24f881885aae5639b0cd6af4ed298",
+                "DAIETH": "0x017e9e62c04b50800d7c59454754fe31a2193c9c3c6c92c093f2ab0faadf8c87",
+                "ETHDAI": "0x017e9e62c04b50800d7c59454754fe31a2193c9c3c6c92c093f2ab0faadf8c87",
+                "DAIUSDC": "0x02e767b996c8d4594c73317bb102c2018b9036aee8eed08ace5f45b3568b94e5",
+                "USDCDAI": "0x02e767b996c8d4594c73317bb102c2018b9036aee8eed08ace5f45b3568b94e5",
+                "DAIUSDT": "0x041d52e15e82b003bf0ad52ca58393c87abef3e00f1bf69682fd4162d5773f8f",
+                "USDTDAI": "0x041d52e15e82b003bf0ad52ca58393c87abef3e00f1bf69682fd4162d5773f8f",
+                "USDCUSDT": "0x041a708cf109737a50baa6cbeb9adf0bf8d97112dc6cc80c7a458cbad35328b0",
+                "USDTUSDC": "0x041a708cf109737a50baa6cbeb9adf0bf8d97112dc6cc80c7a458cbad35328b0",
+                "WBTCUSDC": "0x022e45d94d5c6c477d9efd440aad71b2c02a5cd5bed9a4d6da10bb7c19fd93ba",
+                "USDCWBTC": "0x022e45d94d5c6c477d9efd440aad71b2c02a5cd5bed9a4d6da10bb7c19fd93ba",
+                "WBTCETH": "0x02a6e0ecda844736c4803a385fb1372eff458c365d2325c7d4e08032c7a908f3",
+                "ETHWBTC": "0x02a6e0ecda844736c4803a385fb1372eff458c365d2325c7d4e08032c7a908f3"
+
+
+
+            }
+        },
+
+        "avnu" : {
+            "routerAddress" : "0x04270219d365d6b017231b52e92b3fb5d7c8378b05e9abc97724537a80e93b0f",
+            "pairs" :{
+                "ETHDAI" : "",
+                "DAIETH" : "",
+                "ETHUSDT" : "",
+                "USDTETH" : "",
+                "ETHUSDC" : "",
+                "USDCETH" : "",
+                "ETHWBTC" : "",
+                "WBTCETH" : "",
+                "DAIUSDT" : "",
+                "USDTDAI" : "",
+                "DAIUSDC" : "",
+                "USDCDAI" : "",
+                "DAIWBTC" : "",
+                "WBTCDAI" : "",
+                "USDTUSDC" : "",
+                "USDCUSDT" : "",
+                "USDTWBTC" : "",
+                "WBTCUSDT" : "",
+                "USDCWBTC" : "",
+                "WBTCUSDC" : ""
+            }
+            
+        },
+
+        "orbiter" : {
+            "arbitrum" : "0xD9D74a29307cc6Fc8BF424ee4217f1A587FBc8Dc"
+        },
+
+        "dmail" : {
+            "routerAddress" : "0x0454f0bd015e730e5adbb4f080b075fdbf55654ff41ee336203aa2e1ac4d4309"
+        },
+
+        "zkLend" : {
+            "marketAddress" : "0x04c0a5193d58f74fbace4b74dcf65481e734ed1714121bdc571da345540efa05",
+            "tokens" : {
+                "zUSDC" : "0x047ad51726d891f972e74e4ad858a261b43869f7126ce7436ee0b2529a98f486",
+                "zUSDT" : "0x00811d8da5dc8a2206ea7fd0b28627c2d77280a515126e62baa4d78e22714c4a",
+                "zDAI" : "0x062fa7afe1ca2992f8d8015385a279f49fad36299754fb1e9866f4f052289376", 
+                "zwBTC" : "0x02b9ea3acdb23da566cee8e8beae3125a1458e720dea68c4a9a7a2d8eb5bbb4a",
+                "zETH" : "0x01b5bd713e72fdc5d63ffd83762f81297f6175a5e0a4771cdadbc1dd5fe72cb1"
+            }
+            
+        },
+
+        "starkverse" : "0x060582df2cd4ad2c988b11fdede5c43f56a432e895df255ccd1af129160044b8"
+
+
+
+}

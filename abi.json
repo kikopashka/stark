@@ -1,0 +1,4080 @@
+{
+    "erc20token": [
+        {
+          "members": [
+            {
+              "name": "low",
+              "offset": 0,
+              "type": "felt"
+            },
+            {
+              "name": "high",
+              "offset": 1,
+              "type": "felt"
+            }
+          ],
+          "name": "Uint256",
+          "size": 2,
+          "type": "struct"
+        },
+        {
+          "data": [
+            {
+              "name": "from_",
+              "type": "felt"
+            },
+            {
+              "name": "to",
+              "type": "felt"
+            },
+            {
+              "name": "value",
+              "type": "Uint256"
+            }
+          ],
+          "keys": [],
+          "name": "Transfer",
+          "type": "event"
+        },
+        {
+          "data": [
+            {
+              "name": "owner",
+              "type": "felt"
+            },
+            {
+              "name": "spender",
+              "type": "felt"
+            },
+            {
+              "name": "value",
+              "type": "Uint256"
+            }
+          ],
+          "keys": [],
+          "name": "Approval",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "name",
+          "outputs": [
+            {
+              "name": "name",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "symbol",
+          "outputs": [
+            {
+              "name": "symbol",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "totalSupply",
+          "outputs": [
+            {
+              "name": "totalSupply",
+              "type": "Uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "decimals",
+          "outputs": [
+            {
+              "name": "decimals",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "account",
+              "type": "felt"
+            }
+          ],
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "name": "balance",
+              "type": "Uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "felt"
+            },
+            {
+              "name": "spender",
+              "type": "felt"
+            }
+          ],
+          "name": "allowance",
+          "outputs": [
+            {
+              "name": "remaining",
+              "type": "Uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "permittedMinter",
+          "outputs": [
+            {
+              "name": "minter",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "initialized",
+          "outputs": [
+            {
+              "name": "res",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "get_version",
+          "outputs": [
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "get_identity",
+          "outputs": [
+            {
+              "name": "identity",
+              "type": "felt"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "init_vector_len",
+              "type": "felt"
+            },
+            {
+              "name": "init_vector",
+              "type": "felt*"
+            }
+          ],
+          "name": "initialize",
+          "outputs": [],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "recipient",
+              "type": "felt"
+            },
+            {
+              "name": "amount",
+              "type": "Uint256"
+            }
+          ],
+          "name": "transfer",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "felt"
+            }
+          ],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "felt"
+            },
+            {
+              "name": "recipient",
+              "type": "felt"
+            },
+            {
+              "name": "amount",
+              "type": "Uint256"
+            }
+          ],
+          "name": "transferFrom",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "felt"
+            }
+          ],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "felt"
+            },
+            {
+              "name": "amount",
+              "type": "Uint256"
+            }
+          ],
+          "name": "approve",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "felt"
+            }
+          ],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "felt"
+            },
+            {
+              "name": "added_value",
+              "type": "Uint256"
+            }
+          ],
+          "name": "increaseAllowance",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "felt"
+            }
+          ],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "felt"
+            },
+            {
+              "name": "subtracted_value",
+              "type": "Uint256"
+            }
+          ],
+          "name": "decreaseAllowance",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "felt"
+            }
+          ],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "recipient",
+              "type": "felt"
+            },
+            {
+              "name": "amount",
+              "type": "Uint256"
+            }
+          ],
+          "name": "permissionedMint",
+          "outputs": [],
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "name": "account",
+              "type": "felt"
+            },
+            {
+              "name": "amount",
+              "type": "Uint256"
+            }
+          ],
+          "name": "permissionedBurn",
+          "outputs": [],
+          "type": "function"
+        }
+      ],
+
+      "jediswapRouter": [
+        {
+            "members": [
+                {
+                    "name": "low",
+                    "offset": 0,
+                    "type": "felt"
+                },
+                {
+                    "name": "high",
+                    "offset": 1,
+                    "type": "felt"
+                }
+            ],
+            "name": "Uint256",
+            "size": 2,
+            "type": "struct"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "factory",
+                    "type": "felt"
+                }
+            ],
+            "name": "constructor",
+            "outputs": [],
+            "type": "constructor"
+        },
+        {
+            "inputs": [],
+            "name": "factory",
+            "outputs": [
+                {
+                    "name": "address",
+                    "type": "felt"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "tokenA",
+                    "type": "felt"
+                },
+                {
+                    "name": "tokenB",
+                    "type": "felt"
+                }
+            ],
+            "name": "sort_tokens",
+            "outputs": [
+                {
+                    "name": "token0",
+                    "type": "felt"
+                },
+                {
+                    "name": "token1",
+                    "type": "felt"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountA",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveA",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveB",
+                    "type": "Uint256"
+                }
+            ],
+            "name": "quote",
+            "outputs": [
+                {
+                    "name": "amountB",
+                    "type": "Uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountIn",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveIn",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveOut",
+                    "type": "Uint256"
+                }
+            ],
+            "name": "get_amount_out",
+            "outputs": [
+                {
+                    "name": "amountOut",
+                    "type": "Uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountOut",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveIn",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "reserveOut",
+                    "type": "Uint256"
+                }
+            ],
+            "name": "get_amount_in",
+            "outputs": [
+                {
+                    "name": "amountIn",
+                    "type": "Uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountIn",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "path_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "path",
+                    "type": "felt*"
+                }
+            ],
+            "name": "get_amounts_out",
+            "outputs": [
+                {
+                    "name": "amounts_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "amounts",
+                    "type": "Uint256*"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountOut",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "path_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "path",
+                    "type": "felt*"
+                }
+            ],
+            "name": "get_amounts_in",
+            "outputs": [
+                {
+                    "name": "amounts_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "amounts",
+                    "type": "Uint256*"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "tokenA",
+                    "type": "felt"
+                },
+                {
+                    "name": "tokenB",
+                    "type": "felt"
+                },
+                {
+                    "name": "amountADesired",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountBDesired",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountAMin",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountBMin",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "to",
+                    "type": "felt"
+                },
+                {
+                    "name": "deadline",
+                    "type": "felt"
+                }
+            ],
+            "name": "add_liquidity",
+            "outputs": [
+                {
+                    "name": "amountA",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountB",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "liquidity",
+                    "type": "Uint256"
+                }
+            ],
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "tokenA",
+                    "type": "felt"
+                },
+                {
+                    "name": "tokenB",
+                    "type": "felt"
+                },
+                {
+                    "name": "liquidity",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountAMin",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountBMin",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "to",
+                    "type": "felt"
+                },
+                {
+                    "name": "deadline",
+                    "type": "felt"
+                }
+            ],
+            "name": "remove_liquidity",
+            "outputs": [
+                {
+                    "name": "amountA",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountB",
+                    "type": "Uint256"
+                }
+            ],
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountIn",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountOutMin",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "path_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "path",
+                    "type": "felt*"
+                },
+                {
+                    "name": "to",
+                    "type": "felt"
+                },
+                {
+                    "name": "deadline",
+                    "type": "felt"
+                }
+            ],
+            "name": "swap_exact_tokens_for_tokens",
+            "outputs": [
+                {
+                    "name": "amounts_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "amounts",
+                    "type": "Uint256*"
+                }
+            ],
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "name": "amountOut",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "amountInMax",
+                    "type": "Uint256"
+                },
+                {
+                    "name": "path_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "path",
+                    "type": "felt*"
+                },
+                {
+                    "name": "to",
+                    "type": "felt"
+                },
+                {
+                    "name": "deadline",
+                    "type": "felt"
+                }
+            ],
+            "name": "swap_tokens_for_exact_tokens",
+            "outputs": [
+                {
+                    "name": "amounts_len",
+                    "type": "felt"
+                },
+                {
+                    "name": "amounts",
+                    "type": "Uint256*"
+                }
+            ],
+            "type": "function"
+        }
+    ],
+
+    "jediswapPairsPool": [
+      {
+          "members": [
+              {
+                  "name": "low",
+                  "offset": 0,
+                  "type": "felt"
+              },
+              {
+                  "name": "high",
+                  "offset": 1,
+                  "type": "felt"
+              }
+          ],
+          "name": "Uint256",
+          "size": 2,
+          "type": "struct"
+      },
+      {
+          "data": [
+              {
+                  "name": "from_",
+                  "type": "felt"
+              },
+              {
+                  "name": "to",
+                  "type": "felt"
+              },
+              {
+                  "name": "value",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Transfer",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "owner",
+                  "type": "felt"
+              },
+              {
+                  "name": "spender",
+                  "type": "felt"
+              },
+              {
+                  "name": "value",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Approval",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "from_address",
+                  "type": "felt"
+              },
+              {
+                  "name": "to_address",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Transfer",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "owner",
+                  "type": "felt"
+              },
+              {
+                  "name": "spender",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Approval",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "sender",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount0",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Mint",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "sender",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount0",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "to",
+                  "type": "felt"
+              }
+          ],
+          "keys": [],
+          "name": "Burn",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "sender",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount0In",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1In",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount0Out",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1Out",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "to",
+                  "type": "felt"
+              }
+          ],
+          "keys": [],
+          "name": "Swap",
+          "type": "event"
+      },
+      {
+          "data": [
+              {
+                  "name": "reserve0",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "reserve1",
+                  "type": "Uint256"
+              }
+          ],
+          "keys": [],
+          "name": "Sync",
+          "type": "event"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "token0",
+                  "type": "felt"
+              },
+              {
+                  "name": "token1",
+                  "type": "felt"
+              }
+          ],
+          "name": "constructor",
+          "outputs": [],
+          "type": "constructor"
+      },
+      {
+          "inputs": [],
+          "name": "name",
+          "outputs": [
+              {
+                  "name": "name",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "symbol",
+          "outputs": [
+              {
+                  "name": "symbol",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "totalSupply",
+          "outputs": [
+              {
+                  "name": "totalSupply",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "decimals",
+          "outputs": [
+              {
+                  "name": "decimals",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "account",
+                  "type": "felt"
+              }
+          ],
+          "name": "balanceOf",
+          "outputs": [
+              {
+                  "name": "balance",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "owner",
+                  "type": "felt"
+              },
+              {
+                  "name": "spender",
+                  "type": "felt"
+              }
+          ],
+          "name": "allowance",
+          "outputs": [
+              {
+                  "name": "remaining",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "token0",
+          "outputs": [
+              {
+                  "name": "address",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "token1",
+          "outputs": [
+              {
+                  "name": "address",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "get_reserves",
+          "outputs": [
+              {
+                  "name": "reserve0",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "reserve1",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "block_timestamp_last",
+                  "type": "felt"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "price_0_cumulative_last",
+          "outputs": [
+              {
+                  "name": "res",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "price_1_cumulative_last",
+          "outputs": [
+              {
+                  "name": "res",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "klast",
+          "outputs": [
+              {
+                  "name": "res",
+                  "type": "Uint256"
+              }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "recipient",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount",
+                  "type": "Uint256"
+              }
+          ],
+          "name": "transfer",
+          "outputs": [
+              {
+                  "name": "success",
+                  "type": "felt"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "sender",
+                  "type": "felt"
+              },
+              {
+                  "name": "recipient",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount",
+                  "type": "Uint256"
+              }
+          ],
+          "name": "transferFrom",
+          "outputs": [
+              {
+                  "name": "success",
+                  "type": "felt"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "spender",
+                  "type": "felt"
+              },
+              {
+                  "name": "amount",
+                  "type": "Uint256"
+              }
+          ],
+          "name": "approve",
+          "outputs": [
+              {
+                  "name": "success",
+                  "type": "felt"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "spender",
+                  "type": "felt"
+              },
+              {
+                  "name": "added_value",
+                  "type": "Uint256"
+              }
+          ],
+          "name": "increaseAllowance",
+          "outputs": [
+              {
+                  "name": "success",
+                  "type": "felt"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "spender",
+                  "type": "felt"
+              },
+              {
+                  "name": "subtracted_value",
+                  "type": "Uint256"
+              }
+          ],
+          "name": "decreaseAllowance",
+          "outputs": [
+              {
+                  "name": "success",
+                  "type": "felt"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "to",
+                  "type": "felt"
+              }
+          ],
+          "name": "mint",
+          "outputs": [
+              {
+                  "name": "liquidity",
+                  "type": "Uint256"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "to",
+                  "type": "felt"
+              }
+          ],
+          "name": "burn",
+          "outputs": [
+              {
+                  "name": "amount0",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1",
+                  "type": "Uint256"
+              }
+          ],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "amount0Out",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "amount1Out",
+                  "type": "Uint256"
+              },
+              {
+                  "name": "to",
+                  "type": "felt"
+              },
+              {
+                  "name": "data_len",
+                  "type": "felt"
+              },
+              {
+                  "name": "data",
+                  "type": "felt*"
+              }
+          ],
+          "name": "swap",
+          "outputs": [],
+          "type": "function"
+      },
+      {
+          "inputs": [
+              {
+                  "name": "to",
+                  "type": "felt"
+              }
+          ],
+          "name": "skim",
+          "outputs": [],
+          "type": "function"
+      },
+      {
+          "inputs": [],
+          "name": "sync",
+          "outputs": [],
+          "type": "function"
+      }
+  ],
+
+  "myswapRouter": [
+    {
+      "members": [
+        {
+          "name": "low",
+          "offset": 0,
+          "type": "felt"
+        },
+        {
+          "name": "high",
+          "offset": 1,
+          "type": "felt"
+        }
+      ],
+      "name": "Uint256",
+      "size": 2,
+      "type": "struct"
+    },
+    {
+      "members": [
+        {
+          "name": "name",
+          "offset": 0,
+          "type": "felt"
+        },
+        {
+          "name": "token_a_address",
+          "offset": 1,
+          "type": "felt"
+        },
+        {
+          "name": "token_a_reserves",
+          "offset": 2,
+          "type": "Uint256"
+        },
+        {
+          "name": "token_b_address",
+          "offset": 4,
+          "type": "felt"
+        },
+        {
+          "name": "token_b_reserves",
+          "offset": 5,
+          "type": "Uint256"
+        },
+        {
+          "name": "fee_percentage",
+          "offset": 7,
+          "type": "felt"
+        },
+        {
+          "name": "cfmm_type",
+          "offset": 8,
+          "type": "felt"
+        },
+        {
+          "name": "liq_token",
+          "offset": 9,
+          "type": "felt"
+        }
+      ],
+      "name": "Pool",
+      "size": 10,
+      "type": "struct"
+    },
+    {
+      "data": [
+        {
+          "name": "implementation",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Upgraded",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "previousAdmin",
+          "type": "felt"
+        },
+        {
+          "name": "newAdmin",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "AdminChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        },
+        {
+          "name": "token_from_addr",
+          "type": "felt"
+        },
+        {
+          "name": "amount_from",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount_to_min",
+          "type": "Uint256"
+        }
+      ],
+      "name": "swap",
+      "outputs": [
+        {
+          "name": "amount_to",
+          "type": "Uint256"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        },
+        {
+          "name": "shares_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount_min_a",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount_min_b",
+          "type": "Uint256"
+        }
+      ],
+      "name": "withdraw_liquidity",
+      "outputs": [
+        {
+          "name": "actual1",
+          "type": "Uint256"
+        },
+        {
+          "name": "actual2",
+          "type": "Uint256"
+        },
+        {
+          "name": "res1",
+          "type": "Uint256"
+        },
+        {
+          "name": "res2",
+          "type": "Uint256"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "a_address",
+          "type": "felt"
+        },
+        {
+          "name": "a_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "a_min_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "b_address",
+          "type": "felt"
+        },
+        {
+          "name": "b_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "b_min_amount",
+          "type": "Uint256"
+        }
+      ],
+      "name": "add_liquidity",
+      "outputs": [
+        {
+          "name": "actual1",
+          "type": "Uint256"
+        },
+        {
+          "name": "actual2",
+          "type": "Uint256"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_name",
+          "type": "felt"
+        },
+        {
+          "name": "a_address",
+          "type": "felt"
+        },
+        {
+          "name": "a_initial_liquidity",
+          "type": "Uint256"
+        },
+        {
+          "name": "b_address",
+          "type": "felt"
+        },
+        {
+          "name": "b_initial_liquidity",
+          "type": "Uint256"
+        },
+        {
+          "name": "a_times_b_sqrt_value",
+          "type": "Uint256"
+        }
+      ],
+      "name": "create_new_pool",
+      "outputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "get_version",
+      "outputs": [
+        {
+          "name": "ver",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "get_total_number_of_pools",
+      "outputs": [
+        {
+          "name": "num",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        }
+      ],
+      "name": "get_pool",
+      "outputs": [
+        {
+          "name": "pool",
+          "type": "Pool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        },
+        {
+          "name": "lp_address",
+          "type": "felt"
+        }
+      ],
+      "name": "get_lp_balance",
+      "outputs": [
+        {
+          "name": "shares",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "pool_id",
+          "type": "felt"
+        }
+      ],
+      "name": "get_total_shares",
+      "outputs": [
+        {
+          "name": "total_shares",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "new_implementation",
+          "type": "felt"
+        }
+      ],
+      "name": "upgrade",
+      "outputs": [],
+      "type": "function"
+    }
+  ],
+ 
+  "kswapRouter" :
+  [
+    {
+      "name": "Uint256",
+      "size": 2,
+      "type": "struct",
+      "members": [
+        {
+          "name": "low",
+          "type": "felt",
+          "offset": 0
+        },
+        {
+          "name": "high",
+          "type": "felt",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "name": "constructor",
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "factory",
+          "type": "felt"
+        },
+        {
+          "name": "pairClass",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "factory",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "factory",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "quote",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountA",
+          "type": "Uint256"
+        },
+        {
+          "name": "reserveA",
+          "type": "felt"
+        },
+        {
+          "name": "reserveB",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amountB",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "getAmountOut",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountIn",
+          "type": "Uint256"
+        },
+        {
+          "name": "reserveIn",
+          "type": "felt"
+        },
+        {
+          "name": "reserveOut",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amountOut",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "getAmountIn",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountOut",
+          "type": "Uint256"
+        },
+        {
+          "name": "reserveIn",
+          "type": "felt"
+        },
+        {
+          "name": "reserveOut",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amountIn",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "getAmountsOut",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountIn",
+          "type": "Uint256"
+        },
+        {
+          "name": "path_len",
+          "type": "felt"
+        },
+        {
+          "name": "path",
+          "type": "felt*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amounts_len",
+          "type": "felt"
+        },
+        {
+          "name": "amounts",
+          "type": "Uint256*"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "getAmountsIn",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountOut",
+          "type": "Uint256"
+        },
+        {
+          "name": "path_len",
+          "type": "felt"
+        },
+        {
+          "name": "path",
+          "type": "felt*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amounts_len",
+          "type": "felt"
+        },
+        {
+          "name": "amounts",
+          "type": "Uint256*"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "addLiquidity",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "tokenA",
+          "type": "felt"
+        },
+        {
+          "name": "tokenB",
+          "type": "felt"
+        },
+        {
+          "name": "amountADesired",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountBDesired",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountAMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountBMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "deadline",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amountA",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountB",
+          "type": "Uint256"
+        },
+        {
+          "name": "liquidity",
+          "type": "Uint256"
+        }
+      ]
+    },
+    {
+      "name": "removeLiquidity",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "tokenA",
+          "type": "felt"
+        },
+        {
+          "name": "tokenB",
+          "type": "felt"
+        },
+        {
+          "name": "liquidity",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountAMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountBMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "deadline",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amountA",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountB",
+          "type": "Uint256"
+        }
+      ]
+    },
+    {
+      "name": "swapExactTokensForTokens",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountIn",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountOutMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "path_len",
+          "type": "felt"
+        },
+        {
+          "name": "path",
+          "type": "felt*"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "deadline",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amounts_len",
+          "type": "felt"
+        },
+        {
+          "name": "amounts",
+          "type": "Uint256*"
+        }
+      ]
+    },
+    {
+      "name": "swapTokensForExactTokens",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountOut",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountInMax",
+          "type": "Uint256"
+        },
+        {
+          "name": "path_len",
+          "type": "felt"
+        },
+        {
+          "name": "path",
+          "type": "felt*"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "deadline",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amounts_len",
+          "type": "felt"
+        },
+        {
+          "name": "amounts",
+          "type": "Uint256*"
+        }
+      ]
+    },
+    {
+      "name": "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "amountIn",
+          "type": "Uint256"
+        },
+        {
+          "name": "amountOutMin",
+          "type": "Uint256"
+        },
+        {
+          "name": "path_len",
+          "type": "felt"
+        },
+        {
+          "name": "path",
+          "type": "felt*"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "deadline",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    }
+  ],
+
+  "kswapPairsPool" : [
+    {
+      "members": [
+        {
+          "name": "low",
+          "offset": 0,
+          "type": "felt"
+        },
+        {
+          "name": "high",
+          "offset": 1,
+          "type": "felt"
+        }
+      ],
+      "name": "Uint256",
+      "size": 2,
+      "type": "struct"
+    },
+    {
+      "data": [
+        {
+          "name": "from_",
+          "type": "felt"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "value",
+          "type": "Uint256"
+        }
+      ],
+      "keys": [],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "spender",
+          "type": "felt"
+        },
+        {
+          "name": "value",
+          "type": "Uint256"
+        }
+      ],
+      "keys": [],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "name",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "name": "symbol",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "totalSupply",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "decimals",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "account",
+          "type": "felt"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "spender",
+          "type": "felt"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "remaining",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "recipient",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "Uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "sender",
+          "type": "felt"
+        },
+        {
+          "name": "recipient",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "Uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "spender",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "Uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "spender",
+          "type": "felt"
+        },
+        {
+          "name": "added_value",
+          "type": "Uint256"
+        }
+      ],
+      "name": "increaseAllowance",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "spender",
+          "type": "felt"
+        },
+        {
+          "name": "subtracted_value",
+          "type": "Uint256"
+        }
+      ],
+      "name": "decreaseAllowance",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "data": [
+        {
+          "name": "sender",
+          "type": "felt"
+        },
+        {
+          "name": "amount0",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1",
+          "type": "Uint256"
+        }
+      ],
+      "keys": [],
+      "name": "Mint",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "sender",
+          "type": "felt"
+        },
+        {
+          "name": "amount0",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1",
+          "type": "Uint256"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Burn",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "sender",
+          "type": "felt"
+        },
+        {
+          "name": "amount0In",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1In",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount0Out",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1Out",
+          "type": "Uint256"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Swap",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "reserve0",
+          "type": "felt"
+        },
+        {
+          "name": "reserve1",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Sync",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "constructor",
+      "outputs": [],
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "MINIMUM_LIQUIDITY",
+      "outputs": [
+        {
+          "name": "MINIMUM_LIQUIDITY",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "factory",
+      "outputs": [
+        {
+          "name": "factory",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token0",
+      "outputs": [
+        {
+          "name": "token0",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token1",
+      "outputs": [
+        {
+          "name": "token1",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "blockTimestampLast",
+      "outputs": [
+        {
+          "name": "blockTimestampLast",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "price0CumulativeLast",
+      "outputs": [
+        {
+          "name": "price0CumulativeLast",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "price1CumulativeLast",
+      "outputs": [
+        {
+          "name": "price1CumulativeLast",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kLast",
+      "outputs": [
+        {
+          "name": "kLast",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getReserves",
+      "outputs": [
+        {
+          "name": "reserve0",
+          "type": "felt"
+        },
+        {
+          "name": "reserve1",
+          "type": "felt"
+        },
+        {
+          "name": "blockTimestampLast",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "token0",
+          "type": "felt"
+        },
+        {
+          "name": "token1",
+          "type": "felt"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "name": "mint",
+      "outputs": [
+        {
+          "name": "liquidity",
+          "type": "Uint256"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "name": "burn",
+      "outputs": [
+        {
+          "name": "amount0",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1",
+          "type": "Uint256"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "amount0Out",
+          "type": "Uint256"
+        },
+        {
+          "name": "amount1Out",
+          "type": "Uint256"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "name": "swap",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "name": "skim",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sync",
+      "outputs": [],
+      "type": "function"
+    }
+  ],
+
+  "avnuRouter" : [
+    {
+      "members": [
+        {
+          "name": "low",
+          "offset": 0,
+          "type": "felt"
+        },
+        {
+          "name": "high",
+          "offset": 1,
+          "type": "felt"
+        }
+      ],
+      "name": "Uint256",
+      "size": 2,
+      "type": "struct"
+    },
+    {
+      "members": [
+        {
+          "name": "token_from",
+          "offset": 0,
+          "type": "felt"
+        },
+        {
+          "name": "token_to",
+          "offset": 1,
+          "type": "felt"
+        },
+        {
+          "name": "exchange_address",
+          "offset": 2,
+          "type": "felt"
+        },
+        {
+          "name": "percent",
+          "offset": 3,
+          "type": "felt"
+        }
+      ],
+      "name": "Route",
+      "size": 4,
+      "type": "struct"
+    },
+    {
+      "data": [
+        {
+          "name": "previousOwner",
+          "type": "felt"
+        },
+        {
+          "name": "newOwner",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "implementation",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Upgraded",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "previousAdmin",
+          "type": "felt"
+        },
+        {
+          "name": "newAdmin",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "AdminChanged",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "taker_address",
+          "type": "felt"
+        },
+        {
+          "name": "sell_address",
+          "type": "felt"
+        },
+        {
+          "name": "sell_amount",
+          "type": "felt"
+        },
+        {
+          "name": "buy_address",
+          "type": "felt"
+        },
+        {
+          "name": "buy_amount",
+          "type": "felt"
+        },
+        {
+          "name": "beneficiary",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Swap",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "fee_collector_address",
+          "type": "felt"
+        }
+      ],
+      "name": "initializer",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getName",
+      "outputs": [
+        {
+          "name": "name",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "exchange_address",
+          "type": "felt"
+        }
+      ],
+      "name": "getAdapterClassHash",
+      "outputs": [
+        {
+          "name": "adapter_class_hash",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getFeeCollectorAddress",
+      "outputs": [
+        {
+          "name": "fee_collector_address",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "token_from_address",
+          "type": "felt"
+        },
+        {
+          "name": "token_from_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "token_to_address",
+          "type": "felt"
+        },
+        {
+          "name": "token_to_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "token_to_min_amount",
+          "type": "Uint256"
+        },
+        {
+          "name": "beneficiary",
+          "type": "felt"
+        },
+        {
+          "name": "integrator_fee_amount_bps",
+          "type": "felt"
+        },
+        {
+          "name": "integrator_fee_recipient",
+          "type": "felt"
+        },
+        {
+          "name": "routes_len",
+          "type": "felt"
+        },
+        {
+          "name": "routes",
+          "type": "Route*"
+        }
+      ],
+      "name": "multi_route_swap",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "exchange_address",
+          "type": "felt"
+        },
+        {
+          "name": "adapter_class_hash",
+          "type": "felt"
+        }
+      ],
+      "name": "setAdapterClassHash",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "new_fee_collector_address",
+          "type": "felt"
+        }
+      ],
+      "name": "setFeeCollectorAddress",
+      "outputs": [],
+      "type": "function"
+    }
+  ],
+
+  "orbiter" : [{"inputs":[{"internalType":"address payable","name":"_to","type":"address"},{"internalType":"bytes","name":"_ext","type":"bytes"}],"name":"transfer","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"contract IERC20","name":"_token","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"bytes","name":"_ext","type":"bytes"}],"name":"transferERC20","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+
+  "dmail" : [
+    {
+      "data": [
+        {
+          "name": "from_address",
+          "type": "felt"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "theme",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "send",
+      "type": "event"
+    },
+    {
+      "name": "transaction",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "theme",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    }
+  ],
+
+  "zkLend" : [
+    {
+      "name": "ReserveData",
+      "size": 16,
+      "type": "struct",
+      "members": [
+        {
+          "name": "enabled",
+          "type": "felt",
+          "offset": 0
+        },
+        {
+          "name": "decimals",
+          "type": "felt",
+          "offset": 1
+        },
+        {
+          "name": "z_token_address",
+          "type": "felt",
+          "offset": 2
+        },
+        {
+          "name": "interest_rate_model",
+          "type": "felt",
+          "offset": 3
+        },
+        {
+          "name": "collateral_factor",
+          "type": "felt",
+          "offset": 4
+        },
+        {
+          "name": "borrow_factor",
+          "type": "felt",
+          "offset": 5
+        },
+        {
+          "name": "reserve_factor",
+          "type": "felt",
+          "offset": 6
+        },
+        {
+          "name": "last_update_timestamp",
+          "type": "felt",
+          "offset": 7
+        },
+        {
+          "name": "lending_accumulator",
+          "type": "felt",
+          "offset": 8
+        },
+        {
+          "name": "debt_accumulator",
+          "type": "felt",
+          "offset": 9
+        },
+        {
+          "name": "current_lending_rate",
+          "type": "felt",
+          "offset": 10
+        },
+        {
+          "name": "current_borrowing_rate",
+          "type": "felt",
+          "offset": 11
+        },
+        {
+          "name": "raw_total_debt",
+          "type": "felt",
+          "offset": 12
+        },
+        {
+          "name": "flash_loan_fee",
+          "type": "felt",
+          "offset": 13
+        },
+        {
+          "name": "liquidation_bonus",
+          "type": "felt",
+          "offset": 14
+        },
+        {
+          "name": "debt_limit",
+          "type": "felt",
+          "offset": 15
+        }
+      ]
+    },
+    {
+      "data": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "z_token",
+          "type": "felt"
+        },
+        {
+          "name": "decimals",
+          "type": "felt"
+        },
+        {
+          "name": "interest_rate_model",
+          "type": "felt"
+        },
+        {
+          "name": "collateral_factor",
+          "type": "felt"
+        },
+        {
+          "name": "borrow_factor",
+          "type": "felt"
+        },
+        {
+          "name": "reserve_factor",
+          "type": "felt"
+        },
+        {
+          "name": "flash_loan_fee",
+          "type": "felt"
+        },
+        {
+          "name": "liquidation_bonus",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "NewReserve",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "new_treasury",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "TreasuryUpdate",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "lending_accumulator",
+          "type": "felt"
+        },
+        {
+          "name": "debt_accumulator",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "AccumulatorsSync",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "lending_rate",
+          "type": "felt"
+        },
+        {
+          "name": "borrowing_rate",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "InterestRatesSync",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "limit",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "DebtLimitUpdate",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "face_amount",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Deposit",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "face_amount",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Withdrawal",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "raw_amount",
+          "type": "felt"
+        },
+        {
+          "name": "face_amount",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Borrowing",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "repayer",
+          "type": "felt"
+        },
+        {
+          "name": "beneficiary",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "raw_amount",
+          "type": "felt"
+        },
+        {
+          "name": "face_amount",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Repayment",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "liquidator",
+          "type": "felt"
+        },
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "debt_token",
+          "type": "felt"
+        },
+        {
+          "name": "debt_raw_amount",
+          "type": "felt"
+        },
+        {
+          "name": "debt_face_amount",
+          "type": "felt"
+        },
+        {
+          "name": "collateral_token",
+          "type": "felt"
+        },
+        {
+          "name": "collateral_amount",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "Liquidation",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "initiator",
+          "type": "felt"
+        },
+        {
+          "name": "receiver",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        },
+        {
+          "name": "fee",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "FlashLoan",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "CollateralEnabled",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "CollateralDisabled",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "new_class_hash",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "ContractUpgraded",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "previousOwner",
+          "type": "felt"
+        },
+        {
+          "name": "newOwner",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "name": "constructor",
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "_oracle",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "upgrade",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "new_implementation",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "get_reserve_data",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "data",
+          "type": "ReserveData"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_lending_accumulator",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "res",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_debt_accumulator",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "res",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_pending_treasury_amount",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "res",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_total_debt_for_token",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "debt",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_user_debt_for_token",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "debt",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "get_user_flags",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "map",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "is_user_undercollateralized",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "apply_borrow_factor",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "is_undercollateralized",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "is_collateral_enabled",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "enabled",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "user_has_debt",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "has_debt",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "deposit",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "withdraw",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "withdraw_all",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "borrow",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "repay",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "repay_for",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        },
+        {
+          "name": "beneficiary",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "repay_all",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "enable_collateral",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "disable_collateral",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "liquidate",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "felt"
+        },
+        {
+          "name": "debt_token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        },
+        {
+          "name": "collateral_token",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "flash_loan",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "receiver",
+          "type": "felt"
+        },
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "amount",
+          "type": "felt"
+        },
+        {
+          "name": "calldata_len",
+          "type": "felt"
+        },
+        {
+          "name": "calldata",
+          "type": "felt*"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "add_reserve",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "z_token",
+          "type": "felt"
+        },
+        {
+          "name": "interest_rate_model",
+          "type": "felt"
+        },
+        {
+          "name": "collateral_factor",
+          "type": "felt"
+        },
+        {
+          "name": "borrow_factor",
+          "type": "felt"
+        },
+        {
+          "name": "reserve_factor",
+          "type": "felt"
+        },
+        {
+          "name": "flash_loan_fee",
+          "type": "felt"
+        },
+        {
+          "name": "liquidation_bonus",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "set_treasury",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "new_treasury",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "set_debt_limit",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token",
+          "type": "felt"
+        },
+        {
+          "name": "limit",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "transfer_ownership",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "new_owner",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "renounce_ownership",
+      "type": "function",
+      "inputs": [],
+      "outputs": []
+    }
+  ],
+
+  "starkverse" : [
+    {
+      "name": "Uint256",
+      "size": 2,
+      "type": "struct",
+      "members": [
+        {
+          "name": "low",
+          "type": "felt",
+          "offset": 0
+        },
+        {
+          "name": "high",
+          "type": "felt",
+          "offset": 1
+        }
+      ]
+    },
+    {
+      "data": [
+        {
+          "name": "from_",
+          "type": "felt"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        }
+      ],
+      "keys": [],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "approved",
+          "type": "felt"
+        },
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        }
+      ],
+      "keys": [],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "operator",
+          "type": "felt"
+        },
+        {
+          "name": "approved",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "ApprovalForAll",
+      "type": "event"
+    },
+    {
+      "data": [
+        {
+          "name": "previousOwner",
+          "type": "felt"
+        },
+        {
+          "name": "newOwner",
+          "type": "felt"
+        }
+      ],
+      "keys": [],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "name": "constructor",
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "baseUri",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "uri",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "totalSupply",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "total_supply",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "supportsInterface",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "interfaceId",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "success",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "name",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "name",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "symbol",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "symbol",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "balanceOf",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "Uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "ownerOf",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token_id",
+          "type": "Uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "getApproved",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "token_id",
+          "type": "Uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "approved",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "isApprovedForAll",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        },
+        {
+          "name": "operator",
+          "type": "felt"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "approved",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "tokenURI",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tokenURI",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "owner",
+      "type": "function",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "owner",
+          "type": "felt"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "name": "approve",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setApprovalForAll",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "operator",
+          "type": "felt"
+        },
+        {
+          "name": "approved",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "transferFrom",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "from_",
+          "type": "felt"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "safeTransferFrom",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "from_",
+          "type": "felt"
+        },
+        {
+          "name": "to",
+          "type": "felt"
+        },
+        {
+          "name": "tokenId",
+          "type": "Uint256"
+        },
+        {
+          "name": "data_len",
+          "type": "felt"
+        },
+        {
+          "name": "data",
+          "type": "felt*"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "transferOwnership",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "renounceOwnership",
+      "type": "function",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "publicMint",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "to",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "name": "setBaseUri",
+      "type": "function",
+      "inputs": [
+        {
+          "name": "uri",
+          "type": "felt"
+        }
+      ],
+      "outputs": []
+    }
+  ],
+
+  "starkgate" : [{"anonymous":false,"inputs":[],"name":"LogBridgeActivated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"}],"name":"LogDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositCancelRequest","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositReclaimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"acceptedGovernor","type":"address"}],"name":"LogNewGovernorAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"nominatedGovernor","type":"address"}],"name":"LogNominatedGovernor","type":"event"},{"anonymous":false,"inputs":[],"name":"LogNominationCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"removedGovernor","type":"address"}],"name":"LogRemovedGovernor","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetL2TokenBridge","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxTotalBalance","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"recipient","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},{"inputs":[],"name":"acceptGovernance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelNomination","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositCancelRequest","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositReclaim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"identify","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"bytes","name":"data","type":"bytes"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"isActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isFrozen","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isGovernor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxDeposit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxTotalBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newGovernor","type":"address"}],"name":"nominateNewGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"governorForRemoval","type":"address"}],"name":"removeGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2TokenBridge_","type":"uint256"}],"name":"setL2TokenBridge","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxDeposit_","type":"uint256"}],"name":"setMaxDeposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxTotalBalance_","type":"uint256"}],"name":"setMaxTotalBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+  
+
+  
+
+
+
+}
+
+
