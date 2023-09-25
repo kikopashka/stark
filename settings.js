@@ -22,6 +22,8 @@ export class argentGenerate{
 
 export class argentDeployWallet{
     static mode = true                    //Если true, то функция будет работать, если false, то не будет   
+    static delayMin = 10
+    static delayMax = 100
 }
 
 export class orbiter{

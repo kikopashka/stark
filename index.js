@@ -69,13 +69,14 @@ if (jediswap.mode) {
 let randomProjects = _.shuffle(projects);
 
 for(let i = 0; i < accountsStark.length; i++){
-    const key = accountsStark[i];
+    try{
+    let key = accountsStark[i];
     console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
 
     if(argentDeployWallet.mode){
             await argentDeploy(key);
             console.log(`wallet ${i+1} deployed`);
-            const randomDelay = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+            let randomDelay = getRandomDelay(argentDeployWallet.delayMin, argentDeployWallet.delayMax);
             console.log(`delay ${randomDelay / 1000} sec started`)
             await delay(randomDelay);
         }
@@ -257,6 +258,12 @@ for(let i = 0; i < accountsStark.length; i++){
     }
 
     console.log(`\x1b[32mРабота с аккаунтом ${i+1} закончена\x1b[0m`);
+    fs.appendFileSync('done.txt', key + '\n');
+
+}catch(e){
+    console.log(`\x1b[31mОшибка ${e}\x1b[0m`);
+    fs.appendFileSync('problems.txt', accountsStark[i] + '\n');
+}
 
 }
 
