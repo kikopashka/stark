@@ -43,16 +43,19 @@ if(orbiter.mode){
     }
 }
 
-if(argentDeployWallet.mode){
-    const addressMas = fs.readFileSync("./info/generatedAW.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    const privateKeyAXMas = fs.readFileSync("./info/generatedPK.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    const starkKeyPubAXMas = fs.readFileSync("./info/generatedStarkKeyPubAX.txt").toString().replace(/\r\n/g,'\n').split('\n');
+const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
 
-    for(let i = 0; i < privateKeyAXMas.length; i++){
-        const address = addressMas[i];
-        const key = privateKeyAXMas[i];
-        const starkKeyPubAX = starkKeyPubAXMas[i];
-        await argentDeploy(address, key, starkKeyPubAX);
+if(argentDeployWallet.mode){
+    //const addressMas = fs.readFileSync("./info/generatedAW.txt").toString().replace(/\r\n/g,'\n').split('\n');
+    //const privateKeyAXMas = fs.readFileSync("./info/generatedPK.txt").toString().replace(/\r\n/g,'\n').split('\n');
+    //const starkKeyPubAXMas = fs.readFileSync("./info/generatedStarkKeyPubAX.txt").toString().replace(/\r\n/g,'\n').split('\n');
+
+    for(let i = 0; i < accountsStark.length; i++){
+        //const address = addressMas[i];
+        //const key = privateKeyAXMas[i];
+        //const starkKeyPubAX = starkKeyPubAXMas[i];
+        const key = accountsStark[i];
+        await argentDeploy(key);
         console.log(`wallet ${i+1} deployed`);
         const randomDelay = getRandomDelay(argentDeployWallet.delayMin, argentDeployWallet.delayMax);
         console.log(`delay ${randomDelay / 1000} sec started`)
@@ -64,7 +67,6 @@ if(argentDeployWallet.mode){
 //-------------------------------------------------------------------------------------------------------\\
 
 
-const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
 let projects = [];
 
 if (jediswap.mode) {
