@@ -43,30 +43,11 @@ if(orbiter.mode){
     }
 }
 
-const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
-
-if(argentDeployWallet.mode){
-    //const addressMas = fs.readFileSync("./info/generatedAW.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    //const privateKeyAXMas = fs.readFileSync("./info/generatedPK.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    //const starkKeyPubAXMas = fs.readFileSync("./info/generatedStarkKeyPubAX.txt").toString().replace(/\r\n/g,'\n').split('\n');
-
-    for(let i = 0; i < accountsStark.length; i++){
-        //const address = addressMas[i];
-        //const key = privateKeyAXMas[i];
-        //const starkKeyPubAX = starkKeyPubAXMas[i];
-        const key = accountsStark[i];
-        await argentDeploy(key);
-        console.log(`wallet ${i+1} deployed`);
-        const randomDelay = getRandomDelay(argentDeployWallet.delayMin, argentDeployWallet.delayMax);
-        console.log(`delay ${randomDelay / 1000} sec started`)
-        await delay(randomDelay);
-    }
-}
 
 
 //-------------------------------------------------------------------------------------------------------\\
 
-
+const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
 let projects = [];
 
 if (jediswap.mode) {
@@ -90,6 +71,15 @@ let randomProjects = _.shuffle(projects);
 for(let i = 0; i < accountsStark.length; i++){
     const key = accountsStark[i];
     console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
+
+    if(argentDeployWallet.mode){
+            await argentDeploy(key);
+            console.log(`wallet ${i+1} deployed`);
+            const randomDelay = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+            console.log(`delay ${randomDelay / 1000} sec started`)
+            await delay(randomDelay);
+        }
+    
 
     for(let i = 0; i < randomProjects.length; i++){
         let project = randomProjects[i];

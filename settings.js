@@ -4,7 +4,7 @@ export class general{
     static delayAfterProjectMin = 10
     static delayAfterProjectMax = 100
     static provider = "https://ethereum.publicnode.com"
-    static gwei = 20
+    static gwei = 35
 }
 
 
@@ -21,9 +21,7 @@ export class argentGenerate{
 }
 
 export class argentDeployWallet{
-    static mode = false                    //Если true, то функция будет работать, если false, то не будет   
-    static delayMin = 10                   //Минимальная задержка после деплоя
-    static delayMax = 30                   //Максимальная задержка после деплоя (выбирается рандомно между мин:мах)
+    static mode = true                    //Если true, то функция будет работать, если false, то не будет   
 }
 
 export class orbiter{
@@ -48,7 +46,7 @@ export class jediswap{
 }
 
 export class myswap{
-    static mode = true
+    static mode = false
     static tokenIn = "ETH"
     static swap_number_min = 1
     static swap_number_max = 5
@@ -76,7 +74,7 @@ export class avnu{
 }
 
 export class starkkVerse{
-    static mode = true   
+    static mode = false   
     static mintsMin = 1
     static mintsMax = 5
 }
@@ -90,14 +88,14 @@ export class dmailClass{
 }
 
 export class jediLP{
-    static mode = true
+    static mode = false
     static procentMin = 30                  //минимальный % ETH, который будет отправлен в LP
     static procentMax = 65                  //максимальный % ЕТН, который будет отправлен в LP
 }
 
 export class zkLendClass{
-    static mode = true                      
-    static borrow = true                   //Если true, то будет ещё занимать/выплачивать
+    static mode = false                      
+    static borrow = false                   //Если true, то будет ещё занимать/выплачивать
     //static tokenDepsit = "ETH"              //Токен для использования на zkLend
     static procentMin = 15                  //минимальный процент от баланса токена для депозита
     static procentMax = 45                  //максимальный процент от баланса токена для депозита

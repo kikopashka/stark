@@ -11,7 +11,9 @@ export async function getArgentAddress(key){
   const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
   const targetHash = '0x1a736d6ed154502257f02b1ccdf4d9d1089f80811cd6acad48e6b6a9d1f2003';
   const oldWayAddress = await getArgentAddressOld(key);
+  try{
         let classHash = await provider.getClassHashAt(oldWayAddress);
+  
         if(classHash == targetHash){
         return oldWayAddress;
         } else{
@@ -20,6 +22,10 @@ export async function getArgentAddress(key){
       classHash = await provider.getClassHashAt(newWayAddress);
       return newWayAddress;
         }
+      }catch(e){
+        const address = await getArgentAddressNew(key);
+        return address
+      }
     
 }
 

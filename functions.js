@@ -373,25 +373,32 @@ export async function argentDeploy(key){
             await delay(15000);
     } while(general.gwei < gwei)
 }
-    const accountAddress = getArgentAddress(key); 
+    const accountAddress = await getArgentAddress(key); 
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
-    const account = new Account(provider, accountAddress, key);
+    const account = new Account(provider, accountAddress, key, "1");
     const starkKeyPubAX = ec.starkCurve.getStarkKey(key);
+    const accountAXsierra = json.parse(fs.readFileSync("./ArgentXaccount030.sierra.json").toString("ascii"));
+    const accountAXcasm = json.parse(fs.readFileSync("./ArgentXaccount030.casm.json").toString("ascii"));
 
-    const AXproxyConstructorCallData = CallData.compile({
-        implementation: config.argent.argentXaccountClassHash,
-        selector: hash.getSelectorFromName("initialize"),
-        calldata: CallData.compile({ signer: starkKeyPubAX, guardian: "0" }),
+    const contractAXclassHash = config.argent.argentXaccountClassHashNew;
+
+    const calldataAX = new CallData(accountAXsierra.abi);
+    const ConstructorAXCallData = calldataAX.compile("constructor", {
+        owner: starkKeyPubAX,
+        guardian: "0"
     });
-
+    const accountAXAddress = hash.calculateContractAddressFromHash(starkKeyPubAX, contractAXclassHash, ConstructorAXCallData, 0);
+    const accountAX = new Account(provider, accountAXAddress, key, "1"); // do not forget the "1" at the end
     const deployAccountPayload = {
-        classHash: config.argent.argentXaccountClassHashNew,
-        constructorCalldata: AXproxyConstructorCallData,
-        contractAddress: accountAddress,
-        addressSalt: starkKeyPubAX };
-    
-        const { transaction_hash: AXdAth, contract_address: AXcontractFinalAdress } = await account.deployAccount(deployAccountPayload);
-        console.log('✅ ArgentX wallet deployed at:', AXcontractFinalAdress);
+        classHash: contractAXclassHash,
+        constructorCalldata: ConstructorAXCallData,
+        contractAddress: accountAXAddress,
+        addressSalt: starkKeyPubAX
+    };
+    const { transaction_hash: AXdAth, contract_address: accountAXFinalAdress } = await accountAX.deployAccount(deployAccountPayload);
+    await provider.waitForTransaction(AXdAth);
+
+    console.log('✅ ArgentX wallet deployed at:', accountAXFinalAdress);
 
 
 }
