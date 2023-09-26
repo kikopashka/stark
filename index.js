@@ -114,7 +114,8 @@ for(let i = 0; i < accountsStark.length; i++){
                     const existingPairs = Object.keys(config.jediswap.pairsPool);
                     do {
                         tokenOut = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
-                    } while(!existingPairs.includes(jediswap.tokenIn+tokenOut) && tokenIn == tokenOut)
+                        console.log(`hi`)
+                    } while(!existingPairs.includes(tokenIn+tokenOut) || tokenIn == tokenOut)
 
                     await jediswapSwap(key, tokenIn, tokenOut, procent);
                 }
@@ -145,7 +146,7 @@ for(let i = 0; i < accountsStark.length; i++){
                         const existingPairs = Object.keys(config.myswap.poolId);
                         do {
                             tokenOut = ["USDC", "USDT", "DAI", "ETH"][Math.floor(Math.random() * 4)];
-                        } while(!existingPairs.includes(myswap.tokenIn+tokenOut) && tokenIn == tokenOut)
+                        } while(!existingPairs.includes(tokenIn+tokenOut) || tokenIn == tokenOut)
         
                         await myswapSwap(key, tokenIn, tokenOut, procent);
                     }
@@ -176,7 +177,7 @@ for(let i = 0; i < accountsStark.length; i++){
                             const existingPairs = Object.keys(config.kswap.pairsPool);
                             do {
                                 tokenOut = ["USDC", "USDT", "DAI", "ETH", "WBTC"][Math.floor(Math.random() * 5)];
-                            } while(!existingPairs.includes(kswap.tokenIn+tokenOut) && tokenIn == tokenOut)
+                            } while(!existingPairs.includes(tokenIn+tokenOut) || tokenIn == tokenOut)
             
                             await kswapSwap(key, tokenIn, tokenOut, procent);
                         }
@@ -207,7 +208,7 @@ for(let i = 0; i < accountsStark.length; i++){
                                 const existingPairs = Object.keys(config.avnu.pairs);
                                 do {
                                     tokenOut = ["USDC", "USDT", "DAI", "ETH", "WBTC"][Math.floor(Math.random() * 5)];
-                                } while(!existingPairs.includes(avnu.tokenIn+tokenOut) && tokenIn == tokenOut)
+                                } while(!existingPairs.includes(tokenIn+tokenOut) || tokenIn == tokenOut)
                 
                                 await avnuSwap(key, tokenIn, tokenOut, procent);
                             }
@@ -263,6 +264,8 @@ for(let i = 0; i < accountsStark.length; i++){
 }catch(e){
     console.log(`\x1b[31mОшибка ${e}\x1b[0m`);
     fs.appendFileSync('problems.txt', accountsStark[i] + '\n');
+    await swapAllBalanceToToken(accountsStark[i])
+
 }
 
 }
