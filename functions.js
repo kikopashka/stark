@@ -46,12 +46,12 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
     })
   const starkFee = BigInt(res.overall_fee)  
   //const data = await starkgateContract.connect(wallet).deposit.populateTransaction(amountProcent, starkAddressBN, { value: amountProcent + starkFee, gasPrice: gasPrice});
-
+  //const randomNumber = BigInt(getRandomNumber(0.0003, 0.0004));
     const gasEstimate = await starkgateContract.deposit.estimateGas(
         amountProcent,
         starkAddressBN,
         {
-            value: amountProcent + starkFee + BigInt(1000000),
+            value: amountProcent + starkFee,
             gasPrice: gasPrice*103n/100n
         }
         );
@@ -59,9 +59,9 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
         amountProcent, 
         starkAddressBN,
             {
-                gasLimit: gasEstimate*110n/100n,
+                gasLimit: gasEstimate*150n/100n,
                 gasPrice: gasPrice*103n/100n,
-                value: amountProcent + starkFee + BigInt(1000000),
+                value: amountProcent + starkFee,
             }
     )
     const receipt = await tx.wait();
