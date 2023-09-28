@@ -186,10 +186,14 @@ export function amountConsole(token, amount){
 
 
 export async function gasPriceL1(){
+  try{
   const provider = new ethers.JsonRpcProvider(general.provider)
   const gasPrice = (await provider.getFeeData()).gasPrice;
   const gwei = ethers.formatUnits(gasPrice, 'gwei');
   return gwei;
+  } catch(e){
+    await gasPriceL1();
+  }
 }
 
 

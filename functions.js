@@ -4,7 +4,7 @@ import config from "./config.json" assert { type: "json" };
 import abi from "./abi.json" assert { type: "json"};
 import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1} from "./helper.js";
 import {fetchQuotes, executeSwap} from "@avnu/avnu-sdk";
-import { ethers } from "ethers";
+import { ethers, parseEther } from "ethers";
 import _ from "lodash"
 import {general} from "./settings.js"; 
 
@@ -25,16 +25,18 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
     const starkgateContract = new ethers.Contract(config.starkgate.address, abi.starkgate, provider);
     const balance = await provider.getBalance(wallet.address);
     const procent = getRandomNumber(procentMin, procentMax);
-    const amountProcent = balance*(BigInt(procent))/(100n);
+    const amountProcent = BigInt(balance*(BigInt(procent))/(100n));
 
     const starkAddress = await getArgentAddress(starkKey);
     const starkAddressBN = BigInt(starkAddress)
     const gasPrice = (await provider.getFeeData()).gasPrice;
-
     const gasEstimate = await starkgateContract.deposit.estimateGas(
-        amountProcent, 
+        amountProcent,
         starkAddressBN,
-        {value: amountProcent}
+        {
+            value: amountProcent + parseEther("0.0000000001"),
+            gasPrice: gasPrice
+        }
         );
 
     const tx = await starkgateContract.connect(wallet).deposit(
@@ -42,11 +44,12 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
         starkAddressBN,
             {
                 gasLimit: gasEstimate,
-                gasPrice: gasPrice,
-                value: amountProcent,
+                gasPrice: gasPrice*103n/100n,
+                value: amountProcent + parseEther("0.0000000001"),
             }
     )
-    console.log(`deposited ${ethers.formatUnits(amountProcent, "ether")} ETH to ${starkAddress} from EVM ${wallet.address}`);
+    console.log(tx.hash)
+    console.log(`Deposited ${ethers.formatUnits(amountProcent, "ether")} ETH to ${starkAddress} from EVM ${wallet.address}`);
 
 }
 
@@ -74,7 +77,6 @@ export async function jediswapSwap(key, tokenIn, tokenOut, procent){
         const {address: token0} = await poolContract.token0();
         const reserves = await poolContract.get_reserves();
         const amount = cairo.uint256((balance.balance.low) * BigInt(procent) / 100n);
-        const mm = amountConsole(tokenIn, amount);
         console.log(`Making swap ${pair} on jediswap, amount is ${(amountConsole(tokenIn, amount))} ${tokenIn} `);
 
         let reserveIn, reserveOut;
@@ -150,9 +152,9 @@ export async function myswapSwap(key, tokenIn, tokenOut, procent){
     const divider = BigInt(1000);
     const scale = 1_000_000;
 
-    const maxDstAmount = (BigInt(amount.low) * reserveOut) / (reserveIn + BigInt(amount.low));
+    const maxDstAmount = ((BigInt(amount.low) * reserveOut) / (reserveIn + BigInt(amount.low)));
     const maxDstAmountFee = maxDstAmount - ((maxDstAmount * fee) / divider);
-    const amountOutMin = cairo.uint256( maxDstAmountFee - (97n * maxDstAmountFee) / BigInt(scale));
+    const amountOutMin = cairo.uint256( maxDstAmountFee * 97n / 100n)
     //const amountOutMin = cairo.uint256((BigInt(amount.low) * 97n / 100n ) * (reserves[0] / reserves[1]));
     
     const approveCall = tokenInContract.populate("approve", [config.myswap.routerAddress, amount]);
@@ -303,7 +305,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
 
     const starkAddress = await getArgentAddress(starkKey);
     const starkAddressWithout0x = starkAddress.slice(2);
-    const starkByteAddress = '0x03'+starkAddressWithout0x;
+    const starkByteAddress = '0x030'+starkAddressWithout0x;
     const gasPrice = (await provider.getFeeData()).gasPrice;
 
         if(ethers.parseEther('0.005') > amountProcent){
@@ -328,7 +330,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
             }
     )
     console.log(`deposited ${starkAddress} from EVM ${wallet.address}`);
-    console.log(tx.transactionHash);
+    console.log(tx.hash);
 
 }
 
@@ -378,7 +380,7 @@ export async function argentDeploy(key){
     const account = new Account(provider, accountAddress, key, "1");
     const starkKeyPubAX = ec.starkCurve.getStarkKey(key);
     const accountAXsierra = json.parse(fs.readFileSync("./ArgentXaccount030.sierra.json").toString("ascii"));
-    const accountAXcasm = json.parse(fs.readFileSync("./ArgentXaccount030.casm.json").toString("ascii"));
+    //const accountAXcasm = json.parse(fs.readFileSync("./ArgentXaccount030.casm.json").toString("ascii"));
 
     const contractAXclassHash = config.argent.argentXaccountClassHashNew;
 
