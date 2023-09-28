@@ -1,4 +1,4 @@
-import { RpcProvider, constants, num, stark, hash, CallData, Provider, Contract, Account, ec, json, cairo, getChecksumAddress, shortString, uint256} from "starknet";
+import { RpcProvider, constants, num, stark, hash, CallData, Provider, Contract, Account, ec, json, cairo, getChecksumAddress, shortString, SequencerProvider} from "starknet";
 import fs from "fs";
 import config from "./config.json" assert { type: "json" };
 import abi from "./abi.json" assert { type: "json"};
@@ -7,6 +7,7 @@ import {fetchQuotes, executeSwap} from "@avnu/avnu-sdk";
 import { ethers, parseEther } from "ethers";
 import _ from "lodash"
 import {general} from "./settings.js"; 
+
 
 
 export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
@@ -30,24 +31,41 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
     const starkAddress = await getArgentAddress(starkKey);
     const starkAddressBN = BigInt(starkAddress)
     const gasPrice = (await provider.getFeeData()).gasPrice;
+
+    const starkProvider = new SequencerProvider({
+        baseUrl: 'https://alpha-mainnet.starknet.io/',
+        feederGatewayUrl: 'feeder_gateway',
+        gatewayUrl: 'gateway',
+    });
+  
+  let res = await starkProvider.estimateMessageFee({
+        from_address: '0xae0ee0a63a2ce6baeeffe56e7714fb4efe48d419',
+        to_address: '0x073314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82',
+        entry_point_selector: 'handle_deposit',
+        payload: [starkAddress, amountProcent, '0']
+    })
+  const starkFee = BigInt(res.overall_fee)  
+  //const data = await starkgateContract.connect(wallet).deposit.populateTransaction(amountProcent, starkAddressBN, { value: amountProcent + starkFee, gasPrice: gasPrice});
+
     const gasEstimate = await starkgateContract.deposit.estimateGas(
         amountProcent,
         starkAddressBN,
         {
-            value: amountProcent + parseEther("0.0000000001"),
-            gasPrice: gasPrice
+            value: amountProcent + starkFee + BigInt(1000000),
+            gasPrice: gasPrice*103n/100n
         }
         );
-
     const tx = await starkgateContract.connect(wallet).deposit(
         amountProcent, 
         starkAddressBN,
             {
-                gasLimit: gasEstimate,
+                gasLimit: gasEstimate*110n/100n,
                 gasPrice: gasPrice*103n/100n,
-                value: amountProcent + parseEther("0.0000000001"),
+                value: amountProcent + starkFee + BigInt(1000000),
             }
     )
+    const receipt = await tx.wait();
+
     console.log(tx.hash)
     console.log(`Deposited ${ethers.formatUnits(amountProcent, "ether")} ETH to ${starkAddress} from EVM ${wallet.address}`);
 
@@ -287,6 +305,7 @@ export async function avnuSwap(key, tokenIn, tokenOut, procent){
 
 
 export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
+    try{
 
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
@@ -329,8 +348,14 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
                 value: amount,
             }
     )
-    console.log(`deposited ${starkAddress} from EVM ${wallet.address}`);
+    const receipt = await tx.wait();
     console.log(tx.hash);
+
+    console.log(`deposited ${starkAddress} from EVM ${wallet.address}`);
+        }catch(e){
+            await orbiterBridge();
+
+        }
 
 }
 
