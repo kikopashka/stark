@@ -22,12 +22,6 @@ if(starkgate.mode){
 }
 
 
-if(argentGenerate.mode){
-    for(let i = 0; i < argentGenerate.number_for_generate; i++ ){
-        await argentWalletGenerate();
-        console.log(`wallet ${i+1} generated`)
-    }
-}
 
 if(orbiter.mode){
     const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');
@@ -67,11 +61,39 @@ if (jediswap.mode) {
   }
 
 let randomProjects = _.shuffle(projects);
+const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');
+const starkPrivatemas = fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n');
 
 for(let i = 0; i < accountsStark.length; i++){
+    console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
+
+    if(starkgate.mode){
+
+            let evmKey = EVMprivateMas[i];
+            let starkPrivate = starkPrivatemas[i];
+            await starkgateBridge(evmKey, starkPrivate, starkgate.procentForBridgeMin, starkgate.procentForBridgeMax);
+            let randomDelay = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+            console.log(`delay ${randomDelay / 1000} sec started`)
+            await delay(randomDelay);
+        
+    }
+    
+    
+    
+    if(orbiter.mode){
+
+            let evmKey = EVMprivateMas[i];
+            let starkPrivate = starkPrivatemas[i];
+            await orbiterBridge(evmKey, starkPrivate, orbiter.fromNetwork, orbiter.procentForBridge);
+            let randomDelay = getRandomDelay(orbiter.delayMin, orbiter.delayMax);
+            console.log(`delay ${randomDelay / 1000} sec started`)
+            await delay(randomDelay);
+        
+    }
+
+
     try{
     let key = accountsStark[i];
-    console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
 
     if(argentDeployWallet.mode){
             await argentDeploy(key);

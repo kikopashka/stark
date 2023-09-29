@@ -1,9 +1,10 @@
 export class general{
-    static delayAfterTxMin = 5
-    static delayAfterTxMax = 10
+    static delayAfterTxMin = 10
+    static delayAfterTxMax = 20
     static delayAfterProjectMin = 10
     static delayAfterProjectMax = 100
     static provider = "https://ethereum.publicnode.com"
+    static providerARB = "https://arbitrum.llamarpc.com"
     static gwei = 35
 }
 
@@ -11,7 +12,7 @@ export class general{
 export class starkgate{
     static mode = false
     static procentForBridgeMin = 20
-    static procentForBridgeMax = 50
+    static procentForBridgeMax = 20
 
 }
 
@@ -21,15 +22,15 @@ export class argentGenerate{
 }
 
 export class argentDeployWallet{
-    static mode = true                    //Если true, то функция будет работать, если false, то не будет   
+    static mode = false                    //Если true, то функция будет работать, если false, то не будет   
     static delayMin = 10
     static delayMax = 100
 }
 
 export class orbiter{
-    static mode = false                    //Если true, то функция будет работать, если false, то не будет 
+    static mode = true                    //Если true, то функция будет работать, если false, то не будет 
     static fromNetwork = "arbitrum"        //Из какой сети EVM отправляем (Доступен только arbitrum пока)
-    static procentForBridge = 40           //Процент от баланса MM, который отправляем
+    static procentForBridge = 50           //Процент от баланса MM, который отправляем
     static delayMin = 10                   //Минимальная задержка после деплоя
     static delayMax = 20                   //Максимальная задержка после деплоя (выбирается рандомно между мин:мах)
 } 
@@ -41,8 +42,8 @@ export class orbiter{
 export class jediswap{
     static mode = false                     //Если true, то функция будет работать, если false, то не будет 
     static tokenIn = "ETH"                 //Какой токен бриджим свапаем в первом(!) свапе
-    static swap_number_min = 1
-    static swap_number_max = 10            //Количество свапов на этом DEX
+    static swap_number_min = 2
+    static swap_number_max = 4           //Количество свапов на этом DEX
     static procent_first_swap_min = 60     //Минимальный % для первого свапа ETH
     static procent_first_swap_max = 80     //Максимальный % для первого свапа ЕТН
 }
@@ -50,10 +51,10 @@ export class jediswap{
 export class myswap{
     static mode = false
     static tokenIn = "ETH"
-    static swap_number_min = 1
-    static swap_number_max = 5
-    static procent_first_swap_min = 60
-    static procent_first_swap_max = 70
+    static swap_number_min = 3
+    static swap_number_max = 4
+    static procent_first_swap_min = 40
+    static procent_first_swap_max = 40
 
 }
 

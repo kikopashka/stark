@@ -6,6 +6,29 @@ import abi from "./abi.json" assert { type: "json"};
 import crypto from "crypto";
 import {ethers} from "ethers";
 
+/*
+export async function getFeeForStarkgate(starkAddres, EVMAddress, amount){
+
+  const provider = new SequencerProvider({
+      baseUrl: 'https://alpha-mainnet.starknet.io/',
+      feederGatewayUrl: 'feeder_gateway',
+      gatewayUrl: 'gateway',
+  });
+
+let res = await provider.estimateMessageFee({
+      from_address: '0xae0ee0a63a2ce6baeeffe56e7714fb4efe48d419',
+      to_address: '0x073314940630fd6dcda0d772d4c972c4e0a9946bef9dabf4ef84eda8ef542b82',
+      entry_point_selector: 'handle_deposit',
+      payload: [starkAddres, amount, '0']
+  })
+
+const data = await bridge.methods.deposit(amount, starkAddres);
+
+estimate = await data.estimateGas({ from: EVMAddress, value: BigInt(res.overall_fee) + BigInt(1000000) });
+return estimate;
+} 
+*/
+
 
 export async function getArgentAddress(key){
   const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });

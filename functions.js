@@ -316,7 +316,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
     } while(general.gwei < gwei)
 }
     
-    const provider = new ethers.JsonRpcProvider(config.rpc[fromNetwork]);
+    const provider = new ethers.JsonRpcProvider(general.providerARB);
     const wallet = new ethers.Wallet(evmKey, provider);
     const orbiterContract = new ethers.Contract(config.orbiter[fromNetwork], abi.orbiter, provider);
     const balance = await provider.getBalance(wallet.address);
@@ -326,10 +326,11 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
     const starkAddressWithout0x = starkAddress.slice(2);
     const starkByteAddress = '0x030'+starkAddressWithout0x;
     const gasPrice = (await provider.getFeeData()).gasPrice;
-
+        
         if(ethers.parseEther('0.005') > amountProcent){
-            throw new Error("amount lower than 0.005 ETH");
-        }
+            console.error(`amount lower than 0.005 ETH`);
+        } else {
+        
 
     const gasEstimate = await orbiterContract.transfer.estimateGas(
         "0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8", 
@@ -352,6 +353,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
     console.log(tx.hash);
 
     console.log(`deposited ${starkAddress} from EVM ${wallet.address}`);
+        }
         }catch(e){
             await orbiterBridge();
 
