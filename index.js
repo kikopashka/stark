@@ -1,41 +1,12 @@
 import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge } from "./functions.js";
-import { getArgentAddress, getRandomDelay, getRandomNumber, delay } from "./helper.js";
+import { getRandomDelay, getRandomNumber, delay } from "./helper.js";
 import fs from "fs";
-import { argentGenerate, argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate } from "./settings.js";
+import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate } from "./settings.js";
 import _ from "lodash"
 import config from "./config.json" assert { type: "json" };
 
 
 
-if(starkgate.mode){
-    const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    const starkPrivatemas = fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n');
-
-    for(let i = 0; i < EVMprivateMas.length; i++){
-        const evmKey = EVMprivateMas[i];
-        const starkPrivate = starkPrivatemas[i];
-        await starkgateBridge(evmKey, starkPrivate, starkgate.procentForBridgeMin, starkgate.procentForBridgeMax);
-        const randomDelay = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
-        console.log(`delay ${randomDelay / 1000} sec started`)
-        await delay(randomDelay);
-    }
-}
-
-
-
-if(orbiter.mode){
-    const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');
-    const starkPrivatemas = fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n');
-
-    for(let i = 0; i < starkPrivatemas.length; i++){
-        const evmKey = EVMprivateMas[i];
-        const starkPrivate = starkPrivatemas[i];
-        await orbiterBridge(evmKey, starkPrivate, orbiter.fromNetwork, orbiter.procentForBridge);
-        const randomDelay = getRandomDelay(orbiter.delayMin, orbiter.delayMax);
-        console.log(`delay ${randomDelay / 1000} sec started`)
-        await delay(randomDelay);
-    }
-}
 
 
 

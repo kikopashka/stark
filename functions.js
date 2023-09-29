@@ -198,7 +198,7 @@ export async function myswapSwap(key, tokenIn, tokenOut, procent){
 
 
 export async function kswapSwap(key, tokenIn, tokenOut, procent){
-
+    try{
 
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
@@ -250,7 +250,9 @@ export async function kswapSwap(key, tokenIn, tokenOut, procent){
 
      console.log(`Swap done✅`)
 
-
+    }catch(e){
+        console.log(`\x1b[31mОшибка ${e}\x1b[0m`);
+    }
 
 };
 
@@ -690,6 +692,7 @@ export async function starkverseMint(key){
 
 
 export async function swapAllBalanceToToken(key){
+    try{
 
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
@@ -723,7 +726,11 @@ export async function swapAllBalanceToToken(key){
                 await jediswapSwap(key, tokensWithBalance[i], "ETH", 100);
             }
             else if(project == "myswap"){
+                if(tokensWithBalance[i] == "WBTC"){
+                    await swapAllBalanceToToken(key);
+                } else{
                 await myswapSwap(key, tokensWithBalance[i], "ETH", 100);
+                }
             }
             else if(project == "kswap"){
                 await kswapSwap(key, tokensWithBalance[i], "ETH", 100);
@@ -734,4 +741,7 @@ export async function swapAllBalanceToToken(key){
             
         }
     }    
+}catch(e){
+    await swapAllBalanceToToken(key);
+}
 }

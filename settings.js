@@ -28,7 +28,7 @@ export class argentDeployWallet{
 }
 
 export class orbiter{
-    static mode = true                    //Если true, то функция будет работать, если false, то не будет 
+    static mode = false                    //Если true, то функция будет работать, если false, то не будет 
     static fromNetwork = "arbitrum"        //Из какой сети EVM отправляем (Доступен только arbitrum пока)
     static procentForBridge = 50           //Процент от баланса MM, который отправляем
     static delayMin = 10                   //Минимальная задержка после деплоя
@@ -59,12 +59,12 @@ export class myswap{
 }
 
 export class kswap{
-    static mode = false
+    static mode = true
     static tokenIn = "ETH"
-    static swap_number_min = 1
-    static swap_number_max = 1
-    static procent_first_swap_min = 60
-    static procent_first_swap_max = 70
+    static swap_number_min = 3
+    static swap_number_max = 5
+    static procent_first_swap_min = 20
+    static procent_first_swap_max = 30
 }
 
 export class avnu{
