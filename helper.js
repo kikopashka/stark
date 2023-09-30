@@ -218,8 +218,3 @@ export async function gasPriceL1(){
     await gasPriceL1();
   }
 }
-
-
-
-
-

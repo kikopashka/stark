@@ -1,4 +1,4 @@
-import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge } from "./functions.js";
+import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap } from "./functions.js";
 import { getRandomDelay, getRandomNumber, delay } from "./helper.js";
 import fs from "fs";
 import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate } from "./settings.js";
@@ -84,6 +84,9 @@ for(let i = 0; i < accountsStark.length; i++){
             let randomDelay = getRandomDelay(general.delayAfterMintMin, general.delayAfterMintMax);
             await delay(randomDelay);
             }
+            let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+            console.log(`${delayAfterProject / 1000} sec started`)
+            await delay(delayAfterProject);
         }
             else if(project == "jediswapSwap"){
                 let tokenIn;
@@ -239,6 +242,7 @@ for(let i = 0; i < accountsStark.length; i++){
 
     if(jediLP.mode){
         await jediswapLP(key, jediLP.procentMin, jediLP.procentMax)
+        await swapAllBalanceToToken(key)
         let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
         console.log(`${delayAfterProject / 1000} sec started`)
         await delay(delayAfterProject);
@@ -246,12 +250,17 @@ for(let i = 0; i < accountsStark.length; i++){
 
 
     if(zkLendClass.mode){
+        let procent = getRandomNumber(zkLendClass.procentMin, zkLendClass.procentMax);
         let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
             if(tokenDeposit !== "ETH"){
-                await avnuSwap(key, "ETH", tokenDeposit)
-            }
-
-        await zkLend(key, tokenDeposit, zkLendClass.procentMin, zkLendClass.procentMax, zkLendClass.borrow)
+                await randomswap(key, "ETH", tokenDeposit, procent)
+                await zkLend(key, tokenDeposit, 100, zkLendClass.borrow)
+                await swapAllBalanceToToken(key)
+                }   else{
+                    
+                    await zkLend(key, tokenDeposit, procent, zkLendClass.borrow)
+                    await swapAllBalanceToToken(key)
+                    }
         let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
         console.log(`${delayAfterProject / 1000} sec started`)
         await delay(delayAfterProject);

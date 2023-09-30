@@ -505,6 +505,7 @@ export async function jediswapLP(key, procentMin, procentMax){
     const tokenB = ["USDT", "WBTC", "USDC", "DAI"][Math.floor(Math.random() * 4)];
     const tokenA = "ETH";
     const pair = tokenA+tokenB;
+    console.log(`Adding in jediSwap ${pair} LP `);
     const avnuprocent = getRandomNumber(40,60)
     await avnuSwap(key, tokenA, tokenB, avnuprocent);
     const jediswapContract = new Contract(abi.jediswapRouter, config.jediswap.routerAddress, provider);
@@ -522,7 +523,7 @@ export async function jediswapLP(key, procentMin, procentMax){
     
     const balanceA = await tokenAContract.balanceOf(accountAddress);
     const desiredA = balanceA.balance.low * BigInt(procent) / 100n;
-    const balanceB = tokenBContract.balanceOf(accountAddress);
+    const balanceB = await tokenBContract.balanceOf(accountAddress);
     //let quote;
     if(num.toHex(sort.token0) === num.toHex(config.tokens[tokenA])){
         reserveIn = reserves.reserve0.low;
@@ -533,7 +534,7 @@ export async function jediswapLP(key, procentMin, procentMax){
     }
     
     const quote = await jediswapContract.quote(cairo.uint256(desiredA), cairo.uint256(reserveIn), cairo.uint256(reserveOut));
-    console.log(`Making deposit in ${pair} on jediswap, amount is ${(amountConsole(tokenA, desiredA))} ${tokenA} and ${(amountConsole(tokenB, quote))}${tokenB}`);
+    console.log(`Making deposit in ${pair} on jediswap, amount is ${(amountConsole(tokenA, cairo.uint256(desiredA)))} ${tokenA} and ${(amountConsole(tokenB, cairo.uint256(quote.amountB.low)))}${tokenB}`);
 
     const callDataTokenAApprove = tokenAContract.populate("approve", [config.jediswap.routerAddress, cairo.uint256(desiredA)]);
     const callDataTokenBApprove = tokenBContract.populate("approve", [config.jediswap.routerAddress, cairo.uint256(quote.amountB.low)]);
@@ -594,7 +595,7 @@ export async function jediswapLP(key, procentMin, procentMax){
 }
 
 
-export async function zkLend(key, tokenDeposit, procentMin, procentMax, borrow){
+export async function zkLend(key, tokenDeposit, procent, borrow){
 
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
@@ -605,7 +606,6 @@ export async function zkLend(key, tokenDeposit, procentMin, procentMax, borrow){
     } while(general.gwei < gwei)
 }
 
-    const procent = getRandomNumber(procentMin, procentMax);
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
@@ -629,14 +629,14 @@ export async function zkLend(key, tokenDeposit, procentMin, procentMax, borrow){
     if(borrow){
     let random_number = getRandomNumber(20, 64);
     const borrowAmount = BigInt(random_number)*BigInt(amount.low) / 100n;
-    console.log(`Borrowing ${random_number}% is it ${(amountConsole(tokenDeposit, borrowAmount))}`)
+    console.log(`Borrowing ${random_number}% is it ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))}`)
     const callDataBorrow = zkLendContract.populate("borrow", [tokenDepositContract.address, borrowAmount]);
     const txBorrow = await account.execute([callDataBorrow]);
     console.log(txBorrow.transaction_hash);
     const transaction_receipt_borrow = await provider.waitForTransaction(txBorrow.transaction_hash);
-    delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
     await delay(delayAfterTX);
-    console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, borrowAmount))} ${tokenDeposit}`)
+    console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
 
 
     const debt = await zkLendContract.get_user_debt_for_token(accountAddress, tokenDepositContract.address);
@@ -647,7 +647,7 @@ export async function zkLend(key, tokenDeposit, procentMin, procentMax, borrow){
 
     console.log(txRepay.transaction_hash);
     const transaction_receipt_repay_all = await provider.waitForTransaction(txRepay.transaction_hash);
-    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
     await delay(delayAfterTX);
     console.log(`The debt was paid`)
 
@@ -675,6 +675,7 @@ export async function starkverseMint(key){
             await delay(15000);
     } while(general.gwei < gwei)
 }
+    console.log(`Starting minting NFTs on starkverse`);
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
@@ -742,6 +743,32 @@ export async function swapAllBalanceToToken(key){
         }
     }    
 }catch(e){
+    let a = e;
+    console.log(`Have issue with swap, retryying....`)
     await swapAllBalanceToToken(key);
 }
 }
+
+export async function randomswap(key, tokenIn, tokenOut, procent){
+    try{
+    const projects = ["jediswap", "myswap", "kswap", "avnu"];
+    const randomProjects = _.shuffle(projects);
+    const project = randomProjects[0];
+  
+      if(project == "jediswap"){
+      await jediswapSwap(key, tokenIn, tokenOut, procent);
+    }
+        else if(project == "myswap"){
+        await myswapSwap(key, tokenIn, tokenOut, procent);
+        }
+            else if(project == "kswap"){
+            await kswapSwap(key, tokenIn, tokenOut, procent);
+            }
+              else if(project == "avnu"){
+              await avnuSwap(key, tokenIn, tokenOut, procent);
+              }
+  }catch(e){
+    console.log(`Have issue with swap, retryying....`)
+    await randomswap(key, tokenIn, tokenOut, procent);
+  }
+  }
