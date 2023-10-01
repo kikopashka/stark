@@ -65,7 +65,7 @@ for(let i = 0; i < accountsStark.length; i++){
 
     try{
     let key = accountsStark[i];
-
+    
     if(argentDeployWallet.mode){
             await argentDeploy(key);
             console.log(`wallet ${i+1} deployed`);

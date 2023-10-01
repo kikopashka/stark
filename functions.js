@@ -596,7 +596,6 @@ export async function jediswapLP(key, procentMin, procentMax){
 
 
 export async function zkLend(key, tokenDeposit, procent, borrow){
-
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
         do{
@@ -624,32 +623,12 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
     await delay(delayAfterTX);
     console.log(`Deposit done✅`)
+    await delay(120_000)
 
 
     if(borrow){
-    let random_number = getRandomNumber(20, 64);
-    const borrowAmount = BigInt(random_number)*BigInt(amount.low) / 100n;
-    console.log(`Borrowing ${random_number}% is it ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))}`)
-    const callDataBorrow = zkLendContract.populate("borrow", [tokenDepositContract.address, borrowAmount]);
-    const txBorrow = await account.execute([callDataBorrow]);
-    console.log(txBorrow.transaction_hash);
-    const transaction_receipt_borrow = await provider.waitForTransaction(txBorrow.transaction_hash);
-    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
-    await delay(delayAfterTX);
-    console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
-
-
-    const debt = await zkLendContract.get_user_debt_for_token(accountAddress, tokenDepositContract.address);
-    const repayCallData = zkLendContract.populate("repay_all", [tokenDepositContract.address]);
-    const repayApproveCallData = tokenDepositContract.populate("approve", [zkLendContract.address, cairo.uint256(debt.debt)]);
-
-    const txRepay = await account.execute([repayApproveCallData, repayCallData]);
-
-    console.log(txRepay.transaction_hash);
-    const transaction_receipt_repay_all = await provider.waitForTransaction(txRepay.transaction_hash);
-    delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
-    await delay(delayAfterTX);
-    console.log(`The debt was paid`)
+        await zkLendBorrow(key, tokenDeposit);
+        await zkLendRepayAll(key, tokenDeposit);
 
     }
 
@@ -663,7 +642,80 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     console.log(`Provided money was taken away ✅`)
 }
 
+export async function zkLendBorrow(key, tokenDeposit){
+    try{
 
+    const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+    const accountAddress = await getArgentAddress(key);
+    const account = new Account(provider, accountAddress, key, "1");
+    
+    const tokenZ = new Contract(abi.erc20token, config.zkLend.wrappedTokens[tokenDeposit], provider);
+    const balanceTokenZ = await tokenZ.balanceOf(accountAddress);
+    const zkLendContract = new Contract(abi.zkLend, config.zkLend.marketAddress, provider);
+    const tokenDepositContract = new Contract(abi.erc20token, config.tokens[tokenDeposit], provider);
+  
+    let random_number = getRandomNumber(20, 67);
+    const borrowAmount = BigInt(random_number)*BigInt(balanceTokenZ.balance.low) / 100n;
+    console.log(`Borrowing ${random_number}% is it ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
+    const callDataBorrow = zkLendContract.populate("borrow", [tokenDepositContract.address, borrowAmount]);
+    const {suggestedMaxFee: estimatedFeeBorrow} = await account.estimateInvokeFee({
+        contractAddress: zkLendContract.address,
+        entrypoint: "borrow",
+        calldata: [tokenDepositContract.address, borrowAmount]
+});
+    const txBorrow = await account.execute([callDataBorrow], [zkLendContract.abi],{maxFee: estimatedFeeBorrow*110n/100n});
+    console.log(txBorrow.transaction_hash);
+    const transaction_receipt_borrow = await provider.waitForTransaction(txBorrow.transaction_hash);
+    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    await delay(delayAfterTX);
+    console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
+    await delay(180_000)
+}catch(e){
+    if(e.message.includes('Could not GET from endpoint')){
+        let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+        await delay(delayAfterTX);
+        console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
+        await delay(180_000)
+    }
+
+}
+}
+export async function zkLendRepayAll(key, tokenDeposit){
+
+    const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+    const accountAddress = await getArgentAddress(key);
+    const account = new Account(provider, accountAddress, key, "1");
+    
+    const zkLendContract = new Contract(abi.zkLend, config.zkLend.marketAddress, provider);
+    const tokenDepositContract = new Contract(abi.erc20token, config.tokens[tokenDeposit], provider);
+
+    const debt = await zkLendContract.get_user_debt_for_token(accountAddress, tokenDepositContract.address);
+
+    const repayApproveCallData = tokenDepositContract.populate("approve", [zkLendContract.address, cairo.uint256(debt.debt*103n/100n)]);
+    /*
+    const { suggestedMaxFee: estimatedFeeRepayApprove} = await account.estimateInvokeFee({
+        contractAddress: tokenDepositContract.address,
+        entrypoint: "approve",
+        calldata: repayApproveCallData.calldata
+    });
+    */
+    const repayCallData = zkLendContract.populate("repay_all", [tokenDepositContract.address]);
+    /*
+    const { suggestedMaxFee: estimatedFeeRepay } = await account.estimateInvokeFee({
+        contractAddress: zkLendContract.address,
+        entrypoint: "repay_all",
+        calldata: repayCallData.calldata
+    });
+*/
+    const txRepay = await account.execute([repayApproveCallData, repayCallData]);
+
+    console.log(txRepay.transaction_hash);
+    const transaction_receipt_repay_all = await provider.waitForTransaction(txRepay.transaction_hash);
+    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    await delay(delayAfterTX);
+    console.log(`The debt was paid`)
+    await delay(120000)
+}
 
 export async function starkverseMint(key){
 
