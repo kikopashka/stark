@@ -4068,10 +4068,802 @@
     }
   ],
 
-  "starkgate" : [{"anonymous":false,"inputs":[],"name":"LogBridgeActivated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"}],"name":"LogDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositCancelRequest","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositReclaimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"acceptedGovernor","type":"address"}],"name":"LogNewGovernorAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"nominatedGovernor","type":"address"}],"name":"LogNominatedGovernor","type":"event"},{"anonymous":false,"inputs":[],"name":"LogNominationCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"removedGovernor","type":"address"}],"name":"LogRemovedGovernor","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetL2TokenBridge","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxTotalBalance","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"recipient","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},{"inputs":[],"name":"acceptGovernance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelNomination","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositCancelRequest","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositReclaim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"identify","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"bytes","name":"data","type":"bytes"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"isActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isFrozen","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isGovernor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxDeposit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxTotalBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newGovernor","type":"address"}],"name":"nominateNewGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"governorForRemoval","type":"address"}],"name":"removeGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2TokenBridge_","type":"uint256"}],"name":"setL2TokenBridge","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxDeposit_","type":"uint256"}],"name":"setMaxDeposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxTotalBalance_","type":"uint256"}],"name":"setMaxTotalBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-  
+"starkgate" : [{"anonymous":false,"inputs":[],"name":"LogBridgeActivated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"}],"name":"LogDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositCancelRequest","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"LogDepositReclaimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"acceptedGovernor","type":"address"}],"name":"LogNewGovernorAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"nominatedGovernor","type":"address"}],"name":"LogNominatedGovernor","type":"event"},{"anonymous":false,"inputs":[],"name":"LogNominationCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"removedGovernor","type":"address"}],"name":"LogRemovedGovernor","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetL2TokenBridge","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxDeposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"LogSetMaxTotalBalance","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"recipient","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"LogWithdrawal","type":"event"},{"inputs":[],"name":"acceptGovernance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelNomination","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositCancelRequest","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"l2Recipient","type":"uint256"},{"internalType":"uint256","name":"nonce","type":"uint256"}],"name":"depositReclaim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"identify","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"bytes","name":"data","type":"bytes"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"isActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isFrozen","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isGovernor","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxDeposit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxTotalBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newGovernor","type":"address"}],"name":"nominateNewGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"governorForRemoval","type":"address"}],"name":"removeGovernor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"l2TokenBridge_","type":"uint256"}],"name":"setL2TokenBridge","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxDeposit_","type":"uint256"}],"name":"setMaxDeposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"maxTotalBalance_","type":"uint256"}],"name":"setMaxTotalBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"recipient","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}],
 
-  
+
+"starknetId": [
+  {
+    "members": [
+      {
+        "name": "low",
+        "offset": 0,
+        "type": "felt"
+      },
+      {
+        "name": "high",
+        "offset": 1,
+        "type": "felt"
+      }
+    ],
+    "name": "Uint256",
+    "size": 2,
+    "type": "struct"
+  },
+  {
+    "data": [
+      {
+        "name": "from_",
+        "type": "felt"
+      },
+      {
+        "name": "to",
+        "type": "felt"
+      },
+      {
+        "name": "tokenId",
+        "type": "Uint256"
+      }
+    ],
+    "keys": [],
+    "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "owner",
+        "type": "felt"
+      },
+      {
+        "name": "approved",
+        "type": "felt"
+      },
+      {
+        "name": "tokenId",
+        "type": "Uint256"
+      }
+    ],
+    "keys": [],
+    "name": "Approval",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "owner",
+        "type": "felt"
+      },
+      {
+        "name": "operator",
+        "type": "felt"
+      },
+      {
+        "name": "approved",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "ApprovalForAll",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "implementation",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "previousAdmin",
+        "type": "felt"
+      },
+      {
+        "name": "newAdmin",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "AdminChanged",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "UserDataUpdate",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "keys": [],
+    "name": "ExtendedUserDataUpdate",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt"
+      },
+      {
+        "name": "verifier",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "VerifierDataUpdate",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "author",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "keys": [],
+    "name": "ExtendedVerifierDataUpdate",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "inft_contract",
+        "type": "felt"
+      },
+      {
+        "name": "inft_id",
+        "type": "felt"
+      },
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "on_inft_equipped",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "name": "proxy_admin",
+        "type": "felt"
+      },
+      {
+        "name": "uri_base_len",
+        "type": "felt"
+      },
+      {
+        "name": "uri_base",
+        "type": "felt*"
+      }
+    ],
+    "name": "initializer",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "name": "name",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [
+      {
+        "name": "symbol",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "felt"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "name": "balance",
+        "type": "Uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "Uint256"
+      }
+    ],
+    "name": "ownerOf",
+    "outputs": [
+      {
+        "name": "owner",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      }
+    ],
+    "name": "owner_of",
+    "outputs": [
+      {
+        "name": "owner",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "Uint256"
+      }
+    ],
+    "name": "getApproved",
+    "outputs": [
+      {
+        "name": "approved",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "felt"
+      },
+      {
+        "name": "operator",
+        "type": "felt"
+      }
+    ],
+    "name": "isApprovedForAll",
+    "outputs": [
+      {
+        "name": "is_approved",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "Uint256"
+      }
+    ],
+    "name": "tokenURI",
+    "outputs": [
+      {
+        "name": "tokenURI_len",
+        "type": "felt"
+      },
+      {
+        "name": "tokenURI",
+        "type": "felt*"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "interfaceId",
+        "type": "felt"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      }
+    ],
+    "name": "get_user_data",
+    "outputs": [
+      {
+        "name": "data",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "length",
+        "type": "felt"
+      }
+    ],
+    "name": "get_extended_user_data",
+    "outputs": [
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      }
+    ],
+    "name": "get_unbounded_user_data",
+    "outputs": [
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "address",
+        "type": "felt"
+      }
+    ],
+    "name": "get_verifier_data",
+    "outputs": [
+      {
+        "name": "data",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "length",
+        "type": "felt"
+      },
+      {
+        "name": "address",
+        "type": "felt"
+      }
+    ],
+    "name": "get_extended_verifier_data",
+    "outputs": [
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "address",
+        "type": "felt"
+      }
+    ],
+    "name": "get_unbounded_verifier_data",
+    "outputs": [
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "inft_contract",
+        "type": "felt"
+      },
+      {
+        "name": "inft_id",
+        "type": "felt"
+      }
+    ],
+    "name": "get_equipped_starknet_id",
+    "outputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "to",
+        "type": "felt"
+      },
+      {
+        "name": "starknet_id",
+        "type": "Uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "operator",
+        "type": "felt"
+      },
+      {
+        "name": "approved",
+        "type": "felt"
+      }
+    ],
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "felt"
+      },
+      {
+        "name": "to",
+        "type": "felt"
+      },
+      {
+        "name": "starknet_id",
+        "type": "Uint256"
+      }
+    ],
+    "name": "transferFrom",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "felt"
+      },
+      {
+        "name": "to",
+        "type": "felt"
+      },
+      {
+        "name": "starknet_id",
+        "type": "Uint256"
+      },
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "name": "safeTransferFrom",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      }
+    ],
+    "name": "mint",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt"
+      }
+    ],
+    "name": "set_user_data",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "name": "set_extended_user_data",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt"
+      }
+    ],
+    "name": "set_verifier_data",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "starknet_id",
+        "type": "felt"
+      },
+      {
+        "name": "field",
+        "type": "felt"
+      },
+      {
+        "name": "data_len",
+        "type": "felt"
+      },
+      {
+        "name": "data",
+        "type": "felt*"
+      }
+    ],
+    "name": "set_extended_verifier_data",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "inft_contract",
+        "type": "felt"
+      },
+      {
+        "name": "inft_id",
+        "type": "felt"
+      }
+    ],
+    "name": "equip",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "inft_contract",
+        "type": "felt"
+      },
+      {
+        "name": "inft_id",
+        "type": "felt"
+      }
+    ],
+    "name": "unequip",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "new_implementation",
+        "type": "felt"
+      }
+    ],
+    "name": "upgrade",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "arr_len",
+        "type": "felt"
+      },
+      {
+        "name": "arr",
+        "type": "felt*"
+      }
+    ],
+    "name": "set_token_uri_base",
+    "outputs": [],
+    "type": "function"
+  }
+]
 
 
 

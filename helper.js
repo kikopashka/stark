@@ -219,3 +219,37 @@ export async function gasPriceL1(){
   }
 }
 
+export async function getAllLPBalance(accountAddress){
+  const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+
+  const contractETHUSDC = new Contract(abi.erc20token, config.jediswap.pairsPool.ETHUSDC, provider);
+  const contractETHUSDT = new Contract(abi.erc20token, config.jediswap.pairsPool.ETHUSDT, provider);
+  const contractDAIETH = new Contract(abi.erc20token, config.jediswap.pairsPool.DAIETH, provider);
+  const contractDAIUSDC = new Contract(abi.erc20token, config.jediswap.pairsPool.DAIUSDC, provider);
+  const contractDAIUSDT = new Contract(abi.erc20token, config.jediswap.pairsPool.DAIUSDT, provider);
+  const contractUSDCUSDT = new Contract(abi.erc20token, config.jediswap.pairsPool.USDCUSDT, provider);
+  const contractWBTCETH = new Contract(abi.erc20token, config.jediswap.pairsPool.WBTCETH, provider);
+
+
+
+  //const balanceETH = await contractETH.balanceOf(accountAddress);
+  const balanceETHUSDC = await contractETHUSDC.balanceOf(accountAddress);
+  const balanceETHUSDT = await contractETHUSDT.balanceOf(accountAddress);
+  const balanceDAIETH = await contractDAIETH.balanceOf(accountAddress);
+  const balanceDAIUSDC = await contractDAIUSDC.balanceOf(accountAddress);
+  const balanceDAIUSDT = await contractDAIUSDT.balanceOf(accountAddress);
+  const balanceUSDCUSDT = await contractUSDCUSDT.balanceOf(accountAddress);
+  const balanceWBTCETH = await contractWBTCETH.balanceOf(accountAddress);
+
+
+  return{
+    ETHUSDC : balanceETHUSDC.balance.low,
+    ETHUSDT : balanceETHUSDT.balance.low,
+    DAIETH : balanceDAIETH.balance.low,
+    DAIUSDC : balanceDAIUSDC.balance.low,
+    DAIUSDT : balanceDAIUSDT.balance.low,
+    USDCUSDT : balanceUSDCUSDT.balance.low,
+    WBTCETH : balanceWBTCETH.balance.low,
+
+  };
+}

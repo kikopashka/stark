@@ -1,9 +1,12 @@
+import { getRandomNumber} from "./helper.js";
+//Чтобы поставить рандомизацию на mode у проекта, пишем в строку - getRandomNumber(0, 1) == 1
+
 export class general{
-    static delayAfterTxMin = 10
+    static delayAfterTxMin = 10           //МИНИМУМ 100!!!
     static delayAfterTxMax = 20
     static delayAfterProjectMin = 10
     static delayAfterProjectMax = 100
-    static provider = "https://ethereum.publicnode.com"
+    static provider = "https://eth.llamarpc.com"
     static providerARB = "https://arbitrum.llamarpc.com"
     static gwei = 35
 }
@@ -51,15 +54,15 @@ export class jediswap{
 export class myswap{
     static mode = false
     static tokenIn = "ETH"
-    static swap_number_min = 3
-    static swap_number_max = 4
+    static swap_number_min = 1
+    static swap_number_max = 3
     static procent_first_swap_min = 40
     static procent_first_swap_max = 40
 
 }
 
 export class kswap{
-    static mode = true
+    static mode = false
     static tokenIn = "ETH"
     static swap_number_min = 3
     static swap_number_max = 5
@@ -71,7 +74,7 @@ export class avnu{
     static mode = false
     static tokenIn = "ETH"
     static swap_number_min = 1
-    static swap_number_max = 1
+    static swap_number_max = 2
     static procent_first_swap_min = 60
     static procent_first_swap_max = 70
 }
@@ -79,19 +82,19 @@ export class avnu{
 export class starkkVerse{
     static mode = false   
     static mintsMin = 1
-    static mintsMax = 5
+    static mintsMax = 3
 }
 
 export class dmailClass{
     static mode = false
     static emailToSendMin = 1          //минимальное количество писем
-    static emailToSendMax = 3           //максимальное количество писем
+    static emailToSendMax = 1           //максимальное количество писем
    // static delayMin = 10                 //минимальная задержка 
    // static delayMax = 100                //максимальная задержка
 }
 
 export class jediLP{
-    static mode = false
+    static mode = true
     static procentMin = 30                  //минимальный % ETH, который будет отправлен в LP
     static procentMax = 65                  //максимальный % ЕТН, который будет отправлен в LP
 }
@@ -99,10 +102,14 @@ export class jediLP{
 export class zkLendClass{
     static mode = false                      
     static borrow = false                   //Если true, то будет ещё занимать/выплачивать
-    //static tokenDepsit = "ETH"              //Токен для использования на zkLend
     static procentMin = 15                  //минимальный процент от баланса токена для депозита
     static procentMax = 45                  //максимальный процент от баланса токена для депозита
-    
+}
+
+export class starknetId{
+    static mode = false
+    static mintsMin = 1
+    static mintsMax = 4
 }
 
 

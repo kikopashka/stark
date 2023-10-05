@@ -1,7 +1,7 @@
-import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap } from "./functions.js";
+import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap, identity } from "./functions.js";
 import { getRandomDelay, getRandomNumber, delay } from "./helper.js";
 import fs from "fs";
-import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate } from "./settings.js";
+import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate, starknetId } from "./settings.js";
 import _ from "lodash"
 import config from "./config.json" assert { type: "json" };
 
@@ -29,6 +29,18 @@ if (jediswap.mode) {
   }
   if (avnu.mode) {
     projects.push("avnuSwap");
+  }
+  if (starknetId.mode){
+    projects.push("starknetId")
+  }
+  if (dmailClass.mode){
+    projects.push("dmail")
+  }
+  if (jediLP.mode){
+    projects.push("jediswapLP")
+  }
+  if (zkLendClass.mode){
+    projects.push("zkLend")
   }
 
 let randomProjects = _.shuffle(projects);
@@ -222,50 +234,57 @@ for(let i = 0; i < accountsStark.length; i++){
                     }
 
 
-                            else{
-                                console.log(`jediswap, starkVerse, myswap, kswap, avnuswap were not selected`);
-                            }
+                                else if(project == "starknetId"){
+                                    let number = getRandomNumber(starknetId.mintsMin, starknetId.mintsMax);
+                                    for(i = 0; i < number; i++){
+                                        await identity(key);
+                                    }
+                                    let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+                                    console.log(`${delayAfterProject / 1000} sec started`)
+                                    await delay(delayAfterProject);
+                                }
+
+
+                                    else if(project =="dmail"){
+                                        let emails = getRandomNumber(dmailClass.emailToSendMin, dmailClass.emailToSendMax);
+                                        for(let i = 0; i < emails; i++){
+                                            await dmail(key);
+                                        }
+                                        let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+                                        console.log(`${delayAfterProject / 1000} sec started`)
+                                        await delay(delayAfterProject);
+                                    }
+
+                                            else if(project == "jediswapLP"){
+                                                await jediswapLP(key, jediLP.procentMin, jediLP.procentMax)
+                                                await jediswapLPWithdrawAll(key);
+                                                await swapAllBalanceToToken(key)
+                                                let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+                                                console.log(`${delayAfterProject / 1000} sec started`)
+                                                await delay(delayAfterProject);
+                                            }
+
+                                                else if(project == "zkLend"){
+                                                    let procent = getRandomNumber(zkLendClass.procentMin, zkLendClass.procentMax);
+                                                    let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
+                                                        if(tokenDeposit !== "ETH"){
+                                                            await randomswap(key, "ETH", tokenDeposit, procent)
+                                                            await zkLend(key, tokenDeposit, 100, zkLendClass.borrow)
+                                                            await swapAllBalanceToToken(key)
+                                                            }   else{
+                                                                
+                                                                await zkLend(key, tokenDeposit, procent, zkLendClass.borrow)
+                                                                await swapAllBalanceToToken(key)
+                                                                }
+                                                    let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
+                                                    console.log(`${delayAfterProject / 1000} sec started`)
+                                                    await delay(delayAfterProject);
+                                                }
+
+
                         
     }
 
-    
-    if(dmailClass.mode){
-        let emails = getRandomNumber(dmailClass.emailToSendMin, dmailClass.emailToSendMax);
-        for(let i = 0; i < emails; i++){
-            await dmail(key);
-        }
-        let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
-        console.log(`${delayAfterProject / 1000} sec started`)
-        await delay(delayAfterProject);
-
-    }
-
-    if(jediLP.mode){
-        await jediswapLP(key, jediLP.procentMin, jediLP.procentMax)
-        await swapAllBalanceToToken(key)
-        let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
-        console.log(`${delayAfterProject / 1000} sec started`)
-        await delay(delayAfterProject);
-    }
-
-
-    if(zkLendClass.mode){
-        let procent = getRandomNumber(zkLendClass.procentMin, zkLendClass.procentMax);
-        let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
-            if(tokenDeposit !== "ETH"){
-                await randomswap(key, "ETH", tokenDeposit, procent)
-                await zkLend(key, tokenDeposit, 100, zkLendClass.borrow)
-                await swapAllBalanceToToken(key)
-                }   else{
-                    
-                    await zkLend(key, tokenDeposit, procent, zkLendClass.borrow)
-                    await swapAllBalanceToToken(key)
-                    }
-        let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
-        console.log(`${delayAfterProject / 1000} sec started`)
-        await delay(delayAfterProject);
-        
-    }
 
     console.log(`\x1b[32mРабота с аккаунтом ${i+1} закончена\x1b[0m`);
     fs.appendFileSync('done.txt', key + '\n');

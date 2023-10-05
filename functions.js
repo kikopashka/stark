@@ -2,7 +2,7 @@ import { RpcProvider, constants, num, stark, hash, CallData, Provider, Contract,
 import fs from "fs";
 import config from "./config.json" assert { type: "json" };
 import abi from "./abi.json" assert { type: "json"};
-import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1} from "./helper.js";
+import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1, getAllLPBalance} from "./helper.js";
 import {fetchQuotes, executeSwap} from "@avnu/avnu-sdk";
 import { ethers, parseEther } from "ethers";
 import _ from "lodash"
@@ -468,7 +468,8 @@ export async function dmail(key){
     */
 
     const dmailContract = new Contract(abi.dmail, config.dmail.routerAddress, provider);
-    const email = await generateRandomEmail(4, 15);
+    //const email = await generateRandomEmail(4, 15);
+    const email = "hggugh@gmail.com";
     const hashemail = hashString(email);
     const encoded = ((encoder(`${hashemail}`))).substring(0, 65)
     const NewAddress = `${removeLeadingZeroes(accountAddress)}@dmail.ai`
@@ -490,7 +491,6 @@ export async function dmail(key){
 };
 
 export async function jediswapLP(key, procentMin, procentMax){
-
     let gwei = await gasPriceL1();
     if(general.gwei < gwei){
         do{
@@ -557,26 +557,58 @@ export async function jediswapLP(key, procentMin, procentMax){
     await delay(delayAfterTX);
 
     console.log(`Deposit done`)
+    
+}
 
+export async function jediswapLPWithdrawAll(key){
+    try{
 
+    let gwei = await gasPriceL1();
+    if(general.gwei < gwei){
+        do{
+            gwei = await gasPriceL1()
+            console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
+            await delay(15000);
+    } while(general.gwei < gwei)
+    }
 
+    const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+    const accountAddress = await getArgentAddress(key);
+    const account = new Account(provider, accountAddress, key, "1");
+    
+    const allbalance = await getAllLPBalance(accountAddress);
+
+    const tokensWithBalance = [];
+
+    for (const token in allbalance) {
+      const balance = allbalance[token];
+      if (balance > 0) {
+        tokensWithBalance.push(token);
+      }
+    }
+    const pair = tokensWithBalance[0];
+    console.log(`Withdrawing funds from ${pair} jediswap LP`)
     const lpToken = new Contract(abi.erc20token, config.jediswap.pairsPool[pair], provider);
     const lpBalance = await lpToken.balanceOf(accountAddress);
-    reserves = await jediswapLPcontract.get_reserves();
+    const jediswapContract = new Contract(abi.jediswapRouter, config.jediswap.routerAddress, provider);
+    const jediswapLPcontract = new Contract(abi.jediswapPairsPool, config.jediswap.pairsPool[pair], provider);
+    let reserves = await jediswapLPcontract.get_reserves();
     const totalSupply = await jediswapLPcontract.totalSupply();
-    reserveIn = reserves.reserve0.low;
-    reserveOut = reserves.reserve1.low;
+    let reserveIn = reserves.reserve0.low;
+    let reserveOut = reserves.reserve1.low;
     const slippage = BigInt(25);
     const divider = BigInt(1000);
+    const token0Address = await jediswapLPcontract.token0();
+    const token1Address = await jediswapLPcontract.token1();
     const maxSrcAmount = (BigInt(lpBalance.balance.low) * reserveIn) / totalSupply.totalSupply.low;
     const minSrcAmount = (maxSrcAmount - ((maxSrcAmount * slippage) / divider));
     const maxDstAmount = (BigInt(lpBalance.balance.low) * reserveOut) / totalSupply.totalSupply.low;
     const minDstAmount = (maxDstAmount - ((maxDstAmount * slippage)) / divider);
-    timestamp = Math.floor((Date.now() / 1000))+(60*60);
+    let timestamp =  Math.floor((Date.now() / 1000))+(60*60);
     const approveCall = lpToken.populate("approve", [config.jediswap.routerAddress, cairo.uint256(lpBalance.balance.low)]);
     const removeCall = jediswapContract.populate("remove_liquidity",[
-      tokenAContract.address,
-      tokenBContract.address,
+      num.toHex(token0Address.address),
+      num.toHex(token1Address.address),
       cairo.uint256(lpBalance.balance.low),
       cairo.uint256(minSrcAmount),
       cairo.uint256(minDstAmount),
@@ -587,10 +619,14 @@ export async function jediswapLP(key, procentMin, procentMax){
     const txWithdraw = await account.execute([approveCall, removeCall]);
     console.log(txWithdraw.transaction_hash);
     const transaction_receipt_withdraw = await provider.waitForTransaction(txWithdraw.transaction_hash);
-    delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
     await delay(delayAfterTX);
   
     console.log(`Withdraw done✅`)
+}catch(e){
+    console.log(`Have issue with withdraw, retryying....`)
+    await jediswapLPWithdrawAll(key);
+}
 
 }
 
@@ -823,4 +859,30 @@ export async function randomswap(key, tokenIn, tokenOut, procent){
     console.log(`Have issue with swap, retryying....`)
     await randomswap(key, tokenIn, tokenOut, procent);
   }
+  }
+
+  export async function identity(key){
+
+        let gwei = await gasPriceL1();
+        if(general.gwei < gwei){
+            do{
+                gwei = await gasPriceL1()
+                console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
+                await delay(15000);
+        } while(general.gwei < gwei)
+    }
+
+        const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+        const accountAddress = await getArgentAddress(key);
+        const account = new Account(provider, accountAddress, key, "1");
+        console.log(`Minting starknet identity`)
+
+        const starkIdContract = new Contract(abi.starknetId, config.starknetId, provider)
+        const callDataMint = starkIdContract.populate("mint", [Math.floor(1_000_000_000_000 * Math.random())])
+        const tx = await account.execute(callDataMint);
+        console.log(tx.transaction_hash);
+        const transaction_receipt = await provider.waitForTransaction(tx.transaction_hash);
+        let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+        await delay(delayAfterTX);
+        console.log(`Mint has been successful✅`)
   }
