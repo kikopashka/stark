@@ -2,7 +2,7 @@ import { RpcProvider, constants, num, stark, hash, CallData, Provider, Contract,
 import fs from "fs";
 import config from "./config.json" assert { type: "json" };
 import abi from "./abi.json" assert { type: "json"};
-import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1, getAllLPBalance} from "./helper.js";
+import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1, getAllLPBalance, gasPriceL2} from "./helper.js";
 import {fetchQuotes, executeSwap} from "@avnu/avnu-sdk";
 import { ethers, parseEther } from "ethers";
 import _ from "lodash"
@@ -13,7 +13,7 @@ import {general} from "./settings.js";
 export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
 
     let gwei = await gasPriceL1();
-    if(general.gwei < gwei){
+    if(general.gweiL1 < gwei){
         do{
             gwei = await gasPriceL1()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
@@ -74,10 +74,10 @@ export async function starkgateBridge(evmKey, starkKey, procentMin, procentMax){
 
 export async function jediswapSwap(key, tokenIn, tokenOut, procent){
 
-        let gwei = await gasPriceL1();
+        let gwei = await gasPriceL2();
         if(general.gwei < gwei){
             do{
-                gwei = await gasPriceL1()
+                gwei = await gasPriceL2()
                 console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
                 await delay(15000);
         } while(general.gwei < gwei)
@@ -134,10 +134,10 @@ export async function jediswapSwap(key, tokenIn, tokenOut, procent){
 export async function myswapSwap(key, tokenIn, tokenOut, procent){
     
 
-        let gwei = await gasPriceL1();
+        let gwei = await gasPriceL2();
         if(general.gwei < gwei){
             do{
-                gwei = await gasPriceL1()
+                gwei = await gasPriceL2()
                 console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
                 await delay(15000);
         } while(general.gwei < gwei)
@@ -200,10 +200,10 @@ export async function myswapSwap(key, tokenIn, tokenOut, procent){
 export async function kswapSwap(key, tokenIn, tokenOut, procent){
     try{
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -259,10 +259,10 @@ export async function kswapSwap(key, tokenIn, tokenOut, procent){
 
 export async function avnuSwap(key, tokenIn, tokenOut, procent){
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -310,7 +310,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
     try{
 
     let gwei = await gasPriceL1();
-    if(general.gwei < gwei){
+    if(general.gweiL1 < gwei){
         do{
             gwei = await gasPriceL1()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
@@ -396,10 +396,10 @@ export async function argentWalletGenerate(){
 
 export async function argentDeploy(key){
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -436,10 +436,10 @@ export async function argentDeploy(key){
 
 export async function dmail(key){
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -491,10 +491,10 @@ export async function dmail(key){
 };
 
 export async function jediswapLP(key, procentMin, procentMax){
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -502,6 +502,7 @@ export async function jediswapLP(key, procentMin, procentMax){
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
+   
     const tokenB = ["USDT", "WBTC", "USDC", "DAI"][Math.floor(Math.random() * 4)];
     const tokenA = "ETH";
     const pair = tokenA+tokenB;
@@ -563,10 +564,10 @@ export async function jediswapLP(key, procentMin, procentMax){
 export async function jediswapLPWithdrawAll(key){
     try{
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -632,10 +633,10 @@ export async function jediswapLPWithdrawAll(key){
 
 
 export async function zkLend(key, tokenDeposit, procent, borrow){
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -755,10 +756,10 @@ export async function zkLendRepayAll(key, tokenDeposit){
 
 export async function starkverseMint(key){
 
-    let gwei = await gasPriceL1();
+    let gwei = await gasPriceL2();
     if(general.gwei < gwei){
         do{
-            gwei = await gasPriceL1()
+            gwei = await gasPriceL2()
             console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
             await delay(15000);
     } while(general.gwei < gwei)
@@ -783,14 +784,6 @@ export async function starkverseMint(key){
 export async function swapAllBalanceToToken(key){
     try{
 
-    let gwei = await gasPriceL1();
-    if(general.gwei < gwei){
-        do{
-            gwei = await gasPriceL1()
-            console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
-            await delay(15000);
-    } while(general.gwei < gwei)
-}
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
@@ -863,10 +856,10 @@ export async function randomswap(key, tokenIn, tokenOut, procent){
 
   export async function identity(key){
 
-        let gwei = await gasPriceL1();
+        let gwei = await gasPriceL2();
         if(general.gwei < gwei){
             do{
-                gwei = await gasPriceL1()
+                gwei = await gasPriceL2()
                 console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
                 await delay(15000);
         } while(general.gwei < gwei)

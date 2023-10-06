@@ -219,6 +219,17 @@ export async function gasPriceL1(){
   }
 }
 
+export async function gasPriceL2(){
+  try{
+  const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+  const blockInfo = await provider.getBlock('latest');
+  const gwei = ethers.formatUnits(parseInt(blockInfo.gas_price, 16),"gwei")
+  return gwei;
+  }catch(e){
+    await gasPriceL2();
+  }
+}
+
 export async function getAllLPBalance(accountAddress){
   const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
 

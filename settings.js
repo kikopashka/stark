@@ -8,7 +8,8 @@ export class general{
     static delayAfterProjectMax = 100
     static provider = "https://eth.llamarpc.com"
     static providerARB = "https://arbitrum.llamarpc.com"
-    static gwei = 35
+    static gweiL1 = 20                               //gwei L1 при котром будут работать функции связанные с EVM сетями
+    static gwei = 35                                 //gwei старка при котором будут работать функции старка
 }
 
 
