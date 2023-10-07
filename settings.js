@@ -1,5 +1,6 @@
 import { getRandomNumber} from "./helper.js";
-//Чтобы поставить рандомизацию на mode у проекта, пишем в строку - getRandomNumber(0, 1) == 1
+//Чтобы поставить рандомизацию на mode у проекта, пишем в строку - "random".
+//"random" не работает у starkgate, argentGenerate, argentDeployWallet, orbiter
 
 export class general{
     static delayAfterTxMin = 10           //МИНИМУМ 100!!!
@@ -44,7 +45,7 @@ export class orbiter{
 
 
 export class jediswap{
-    static mode = false                     //Если true, то функция будет работать, если false, то не будет 
+    static mode = "random"                     //Если true, то функция будет работать, если false, то не будет 
     static tokenIn = "ETH"                 //Какой токен бриджим свапаем в первом(!) свапе
     static swap_number_min = 2
     static swap_number_max = 4           //Количество свапов на этом DEX
@@ -53,7 +54,7 @@ export class jediswap{
 }
 
 export class myswap{
-    static mode = false
+    static mode = "random"
     static tokenIn = "ETH"
     static swap_number_min = 1
     static swap_number_max = 3
@@ -63,7 +64,7 @@ export class myswap{
 }
 
 export class kswap{
-    static mode = false
+    static mode = "random"
     static tokenIn = "ETH"
     static swap_number_min = 3
     static swap_number_max = 5
@@ -72,7 +73,7 @@ export class kswap{
 }
 
 export class avnu{
-    static mode = false
+    static mode = "random"
     static tokenIn = "ETH"
     static swap_number_min = 1
     static swap_number_max = 2
@@ -81,13 +82,13 @@ export class avnu{
 }
 
 export class starkkVerse{
-    static mode = false   
+    static mode = "random"   
     static mintsMin = 1
     static mintsMax = 3
 }
 
 export class dmailClass{
-    static mode = false
+    static mode = "random"
     static emailToSendMin = 1          //минимальное количество писем
     static emailToSendMax = 1           //максимальное количество писем
    // static delayMin = 10                 //минимальная задержка 
@@ -95,20 +96,20 @@ export class dmailClass{
 }
 
 export class jediLP{
-    static mode = true
+    static mode = "random"
     static procentMin = 30                  //минимальный % ETH, который будет отправлен в LP
     static procentMax = 65                  //максимальный % ЕТН, который будет отправлен в LP
 }
 
 export class zkLendClass{
-    static mode = false                      
+    static mode = "random"                      
     static borrow = false                   //Если true, то будет ещё занимать/выплачивать
     static procentMin = 15                  //минимальный процент от баланса токена для депозита
     static procentMax = 45                  //максимальный процент от баланса токена для депозита
 }
 
 export class starknetId{
-    static mode = false
+    static mode = "random"
     static mintsMin = 1
     static mintsMax = 4
 }

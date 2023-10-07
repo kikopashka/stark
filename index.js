@@ -5,49 +5,92 @@ import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse,
 import _ from "lodash"
 import config from "./config.json" assert { type: "json" };
 
-
-
-
-
-
 //-------------------------------------------------------------------------------------------------------\\
 
 const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
-let projects = [];
 
-if (jediswap.mode) {
-    projects.push("jediswapSwap");
-  }
-  if (myswap.mode) {
-    projects.push("myswapSwap");
-  }
-  if (kswap.mode) {
-    projects.push("kswapSwap");
-  }
-  if (starkkVerse.mode) {
-    projects.push("starkverseMint");
-  }
-  if (avnu.mode) {
-    projects.push("avnuSwap");
-  }
-  if (starknetId.mode){
-    projects.push("starknetId")
-  }
-  if (dmailClass.mode){
-    projects.push("dmail")
-  }
-  if (jediLP.mode){
-    projects.push("jediswapLP")
-  }
-  if (zkLendClass.mode){
-    projects.push("zkLend")
-  }
-
-let randomProjects = _.shuffle(projects);
 const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');
 const starkPrivatemas = fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n');
 
 for(let i = 0; i < accountsStark.length; i++){
+
+            let projects = [];
+
+            if (jediswap.mode === true) {
+                projects.push("jediswapSwap");
+            } else if (jediswap.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("jediswapSwap");
+                }
+            }
+            
+            if (myswap.mode === true) {
+                projects.push("myswapSwap");
+            } else if (myswap.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("myswapSwap");
+                }
+            }
+
+            if (kswap.mode === true) {
+                projects.push("kswapSwap");
+            } else if (kswap.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("kswapSwap");
+                }
+            }
+
+            if (starkkVerse.mode === true) {
+                projects.push("starkverseMint");
+            } else if (starkkVerse.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("starkverseMint");
+                }
+            }
+
+            if (avnu.mode === true) {
+                projects.push("avnuSwap");
+            } else if (avnu.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("avnuSwap");
+                }
+            }
+
+            if (starknetId.mode === true) {
+                projects.push("starknetId");
+            } else if (starknetId.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("starknetId");
+                }
+            }
+
+            if (dmailClass.mode === true) {
+                projects.push("dmail");
+            } else if (dmailClass.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("dmail");
+                }
+            }
+
+            if (jediLP.mode === true) {
+                projects.push("jediswapLP");
+            } else if (jediLP.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("jediswapLP");
+                }
+            }
+
+            if (zkLendClass.mode === true) {
+                projects.push("zkLend");
+            } else if (zkLendClass.mode === "random") {
+                if (getRandomNumber(0, 1) === 1) {
+                    projects.push("zkLend");
+                }
+            }
+            
+
+            let randomProjects = _.shuffle(projects);
+
     console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
 
     if(starkgate.mode){
@@ -267,13 +310,22 @@ for(let i = 0; i < accountsStark.length; i++){
                                                 else if(project == "zkLend"){
                                                     let procent = getRandomNumber(zkLendClass.procentMin, zkLendClass.procentMax);
                                                     let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
+                                                    let borrow;
+                                                    
+                                                        if (zkLendClass.mode === true) {
+                                                            borrow = true
+                                                        } else if (zkLendClass.mode === "random") {
+                                                            if (getRandomNumber(0, 1) === 1) {
+                                                                borrow = true
+                                                            }
+                                                        }
                                                         if(tokenDeposit !== "ETH"){
                                                             await randomswap(key, "ETH", tokenDeposit, procent)
-                                                            await zkLend(key, tokenDeposit, 100, zkLendClass.borrow)
+                                                            await zkLend(key, tokenDeposit, 100, borrow)
                                                             await swapAllBalanceToToken(key)
                                                             }   else{
                                                                 
-                                                                await zkLend(key, tokenDeposit, procent, zkLendClass.borrow)
+                                                                await zkLend(key, tokenDeposit, procent, borrow)
                                                                 await swapAllBalanceToToken(key)
                                                                 }
                                                     let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
