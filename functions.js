@@ -469,7 +469,7 @@ export async function dmail(key){
 
     const dmailContract = new Contract(abi.dmail, config.dmail.routerAddress, provider);
     //const email = await generateRandomEmail(4, 15);
-    const email = "hggugh@gmail.com";
+    const email = await generateRandomEmail(4, 15);
     const hashemail = hashString(email);
     const encoded = ((encoder(`${hashemail}`))).substring(0, 65)
     const NewAddress = `${removeLeadingZeroes(accountAddress)}@dmail.ai`
