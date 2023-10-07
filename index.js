@@ -279,7 +279,7 @@ for(let i = 0; i < accountsStark.length; i++){
 
                                 else if(project == "starknetId"){
                                     let number = getRandomNumber(starknetId.mintsMin, starknetId.mintsMax);
-                                    for(i = 0; i < number; i++){
+                                    for(let i = 0; i < number; i++){
                                         await identity(key);
                                     }
                                     let delayAfterProject = getRandomDelay(general.delayAfterProjectMin, general.delayAfterProjectMax);
