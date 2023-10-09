@@ -27,7 +27,22 @@
         "DAI"  : 18,
         "USDC"  : 6,
         "USDT"  : 6,
-        "WBTC"  : 8 
+        "WBTC"  : 8,
+        "zETH" : 18,
+        "zDAI" : 18,
+        "zUSDC" : 6,
+        "zUSDT" : 6,
+        "zWBTC" : 8,
+        "ETHUSDC" : 18,
+        "ETHUSDT" : 18,
+        "DAIETH" : 18,
+        "DAIUSDC" : 18,
+        "DAIUSDT" : 18,
+        "USDCUSDT" : 18,
+        "WBTCETH" : 18
+
+
+
 
     },
 

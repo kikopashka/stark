@@ -1,7 +1,7 @@
-import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, argentWalletGenerate, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap, identity, jediswapLPWithdrawAll } from "./functions.js";
-import { getRandomDelay, getRandomNumber, delay } from "./helper.js";
+import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap, identity, jediswapLPWithdrawAll, checkAllBalance } from "./functions.js";
+import { getRandomDelay, getRandomNumber, delay, getArgentAddress } from "./helper.js";
 import fs from "fs";
-import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate, starknetId } from "./settings.js";
+import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate, starknetId, checkBalance } from "./settings.js";
 import _ from "lodash"
 import config from "./config.json" assert { type: "json" };
 
@@ -91,7 +91,7 @@ for(let i = 0; i < accountsStark.length; i++){
 
             let randomProjects = _.shuffle(projects);
 
-    console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1}\x1b[0m`);
+    console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1} - ${await getArgentAddress(accountsStark[i])}\x1b[0m`);
 
     if(starkgate.mode){
 
@@ -128,6 +128,13 @@ for(let i = 0; i < accountsStark.length; i++){
             console.log(`delay ${randomDelay / 1000} sec started`)
             await delay(randomDelay);
         }
+
+    if(checkBalance.mode){
+        let key = starkPrivatemas[i];
+        await checkAllBalance(key);
+
+
+    }
     
 
     for(let i = 0; i < randomProjects.length; i++){

@@ -264,3 +264,29 @@ export async function getAllLPBalance(accountAddress){
 
   };
 }
+
+export async function getzkLendbalance(accountAddress){
+    const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+
+    const contractzETH = new Contract(abi.erc20token, config.zkLend.wrappedTokens.ETH, provider);
+    const contractzUSDC = new Contract(abi.erc20token, config.zkLend.wrappedTokens.USDC, provider);
+    const contractzUSDT = new Contract(abi.erc20token, config.zkLend.wrappedTokens.USDT, provider);
+    const contractzDAI = new Contract(abi.erc20token, config.zkLend.wrappedTokens.DAI, provider);
+    const contractzWBTC = new Contract(abi.erc20token, config.zkLend.wrappedTokens.WBTC, provider);
+
+
+    const balancezETH = await contractzETH.balanceOf(accountAddress);
+    const balancezUSDC = await contractzUSDC.balanceOf(accountAddress);
+    const balancezUSDT = await contractzUSDT.balanceOf(accountAddress);
+    const balancezDAI = await contractzDAI.balanceOf(accountAddress);
+    const balancezWBTC = await contractzWBTC.balanceOf(accountAddress);
+
+
+    return{
+      zETH : balancezETH.balance.low,
+      zUSDC : balancezUSDC.balance.low,
+      zUSDT : balancezUSDT.balance.low,
+      zDAI : balancezDAI.balance.low,
+      zWBTC : balancezWBTC.balance.low,
+    };
+}

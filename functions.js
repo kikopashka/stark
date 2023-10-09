@@ -2,9 +2,9 @@ import { RpcProvider, constants, num, stark, hash, CallData, Provider, Contract,
 import fs from "fs";
 import config from "./config.json" assert { type: "json" };
 import abi from "./abi.json" assert { type: "json"};
-import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1, getAllLPBalance, gasPriceL2} from "./helper.js";
+import { getArgentAddress, generateRandomEmail, getRandomNumber, hashString, encoder, removeLeadingZeroes, delay, getRandomDelay, getAllBalance, amountConsole, gasPriceL1, getAllLPBalance, gasPriceL2, getzkLendbalance} from "./helper.js";
 import {fetchQuotes, executeSwap} from "@avnu/avnu-sdk";
-import { ethers, parseEther } from "ethers";
+import { ethers } from "ethers";
 import _ from "lodash"
 import {general} from "./settings.js"; 
 
@@ -878,4 +878,29 @@ export async function randomswap(key, tokenIn, tokenOut, procent){
         let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
         await delay(delayAfterTX);
         console.log(`Mint has been successful✅`)
+  }
+
+
+  export async function checkAllBalance(key){
+    const accountAddress = await getArgentAddress(key);
+    const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
+    const contractETH = new Contract(abi.erc20token, config.tokens.ETH, provider);
+    const balanceETH = await contractETH.balanceOf(accountAddress);
+
+    const jediLPBalance = await getAllLPBalance(accountAddress);
+    
+    const zkLendBalance = await getzkLendbalance(accountAddress);
+    const allBalance = await getAllBalance(accountAddress);
+    const balances = [jediLPBalance, zkLendBalance, allBalance];
+    console.log(`${amountConsole("ETH", cairo.uint256(balanceETH.balance.low))} ETH`);
+
+    for (const token of balances) {
+        for (const tokenKey in token) {
+          const tokenBalance = token[tokenKey];
+          
+          if (tokenBalance > 0n) {
+            console.log(`${amountConsole(tokenKey, cairo.uint256(tokenBalance))} ${tokenKey}`)
+          }
+        }
+      }
   }
