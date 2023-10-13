@@ -708,17 +708,17 @@ export async function zkLendBorrow(key, tokenDeposit){
     console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
     await delay(180_000)
 }catch(e){
-    //if(e.message.includes('Could not GET from endpoint')){
+    if(e.message.includes('Could not GET from endpoint')){
         let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
         await delay(delayAfterTX);
         console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
         await delay(180_000)
-    //}
+    }
 
 }
 }
 export async function zkLendRepayAll(key, tokenDeposit){
-
+    try{
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
@@ -752,6 +752,11 @@ export async function zkLendRepayAll(key, tokenDeposit){
     await delay(delayAfterTX);
     console.log(`The debt was paid`)
     await delay(120000)
+}catch(e){
+    console.log(`\x1b[31mОшибка  в функции zkLendRepayAll ${e}\x1b[0m`);
+    await zkLendRepayAll(key, tokenDeposit);
+}
+
 }
 
 export async function starkverseMint(key){
