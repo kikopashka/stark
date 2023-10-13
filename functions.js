@@ -708,12 +708,12 @@ export async function zkLendBorrow(key, tokenDeposit){
     console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
     await delay(180_000)
 }catch(e){
-    if(e.message.includes('Could not GET from endpoint')){
+    //if(e.message.includes('Could not GET from endpoint')){
         let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
         await delay(delayAfterTX);
         console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
         await delay(180_000)
-    }
+    //}
 
 }
 }
