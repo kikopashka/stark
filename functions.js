@@ -313,7 +313,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
     if(general.gweiL1 < gwei){
         do{
             gwei = await gasPriceL1()
-            console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gwei}`);
+            console.log(`Gwei now ${gwei} , waiting lowwer than ${general.gweiL1}`);
             await delay(15000);
     } while(general.gwei < gwei)
 }
@@ -404,6 +404,8 @@ export async function argentDeploy(key){
             await delay(15000);
     } while(general.gwei < gwei)
 }
+
+try{
     const accountAddress = await getArgentAddress(key); 
     const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
     const account = new Account(provider, accountAddress, key, "1");
@@ -430,7 +432,9 @@ export async function argentDeploy(key){
     await provider.waitForTransaction(AXdAth);
 
     console.log('✅ ArgentX wallet deployed at:', accountAXFinalAdress);
-
+}catch(e){
+    await argentDeploy(key);
+}
 
 }
 
@@ -647,27 +651,27 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     const account = new Account(provider, accountAddress, key, "1");
     
     const zkLendContract = new Contract(abi.zkLend, config.zkLend.marketAddress, provider);
-    const tokenDepositContract = new Contract(abi.erc20token, config.tokens[tokenDeposit], provider);
+    const tokenDepositContract = new Contract(abi.erc20token, config.tokens["DAI"], provider);
     const balance = await tokenDepositContract.balanceOf(accountAddress);
     const amount = cairo.uint256((BigInt(procent) * balance.balance.low) /100n)
     const callDataApprove = tokenDepositContract.populate("approve", [config.zkLend.marketAddress, amount]);
     const callDataDeposit = zkLendContract.populate("deposit", [tokenDepositContract.address, amount.low]);
     const callDataenable_collateral = zkLendContract.populate("enable_collateral", [tokenDepositContract.address]);
     console.log(`Making deposit ${(amountConsole(tokenDeposit, amount))} ${tokenDeposit}`)
-    const tx = await account.execute([callDataApprove, callDataDeposit, callDataenable_collateral]);
-    console.log(tx.transaction_hash);
-    const transaction_receipt = await provider.waitForTransaction(tx.transaction_hash);
+    //const tx = await account.execute([callDataApprove, callDataDeposit, callDataenable_collateral]);
+    //console.log(tx.transaction_hash);
+    //const transaction_receipt = await provider.waitForTransaction(tx.transaction_hash);
     let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
-    await delay(delayAfterTX);
+    //await delay(delayAfterTX);
     console.log(`Deposit done✅`)
-    await delay(120_000)
+    //await delay(120_000)
 
 
-    if(borrow){
+    /* if(borrow){
         await zkLendBorrow(key, tokenDeposit);
         await zkLendRepayAll(key, tokenDeposit);
 
-    }
+    } */
 
     const withdrawCallData = zkLendContract.populate("withdraw_all", [tokenDepositContract.address]);
     const txWithdraw = await account.execute(withdrawCallData);
@@ -703,16 +707,14 @@ export async function zkLendBorrow(key, tokenDeposit){
     const txBorrow = await account.execute([callDataBorrow], [zkLendContract.abi],{maxFee: estimatedFeeBorrow*110n/100n});
     console.log(txBorrow.transaction_hash);
     const transaction_receipt_borrow = await provider.waitForTransaction(txBorrow.transaction_hash);
-    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    let delayAfterTX = getRandomDelay(30, 40);
     await delay(delayAfterTX);
     console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
-    await delay(180_000)
 }catch(e){
     if(e.message.includes('Could not GET from endpoint')){
-        let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+        let delayAfterTX = getRandomDelay(30, 40);
         await delay(delayAfterTX);
         console.log(`Funds were borrowed ${(amountConsole(tokenDeposit, cairo.uint256(borrowAmount)))} ${tokenDeposit}`)
-        await delay(180_000)
     }
 
 }
@@ -748,12 +750,12 @@ export async function zkLendRepayAll(key, tokenDeposit){
 
     console.log(txRepay.transaction_hash);
     const transaction_receipt_repay_all = await provider.waitForTransaction(txRepay.transaction_hash);
-    let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
+    let delayAfterTX = getRandomDelay(30, 40);
     await delay(delayAfterTX);
     console.log(`The debt was paid`)
-    await delay(120000)
 }catch(e){
-    console.log(`\x1b[31mОшибка  в функции zkLendRepayAll ${e}\x1b[0m`);
+    console.log(`\x1b[31mОшибка  в функции zkLendRepayAll \x1b[0m`);
+    await randomswap(key, "ETH", tokenDeposit, 15);
     await zkLendRepayAll(key, tokenDeposit);
 }
 

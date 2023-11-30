@@ -1,4 +1,4 @@
-import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap, identity, jediswapLPWithdrawAll, checkAllBalance } from "./functions.js";
+import { jediswapSwap, myswapSwap, kswapSwap, avnuSwap, orbiterBridge, dmail, jediswapLP, zkLend, starkverseMint, argentDeploy, swapAllBalanceToToken, starkgateBridge, randomswap, identity, jediswapLPWithdrawAll, checkAllBalance, zkLendRepayAll } from "./functions.js";
 import { getRandomDelay, getRandomNumber, delay, getArgentAddress } from "./helper.js";
 import fs from "fs";
 import {argentDeployWallet, orbiter, jediswap, myswap, kswap, avnu, starkkVerse, dmailClass, jediLP, zkLendClass, general, starkgate, starknetId, checkBalance } from "./settings.js";
@@ -92,7 +92,6 @@ for(let i = 0; i < accountsStark.length; i++){
             let randomProjects = _.shuffle(projects);
 
     console.log(`\x1b[34mНачинаю работу с аккаунтом ${i+1} - ${await getArgentAddress(accountsStark[i])}\x1b[0m`);
-
     if(starkgate.mode){
 
             let evmKey = EVMprivateMas[i];
@@ -120,7 +119,6 @@ for(let i = 0; i < accountsStark.length; i++){
 
     try{
     let key = accountsStark[i];
-    
     if(argentDeployWallet.mode){
             await argentDeploy(key);
             console.log(`wallet ${i+1} deployed`);
@@ -130,7 +128,7 @@ for(let i = 0; i < accountsStark.length; i++){
         }
 
     if(checkBalance.mode){
-        let key = starkPrivatemas[i];
+        //let key = starkPrivatemas[i];
         await checkAllBalance(key);
 
 
@@ -317,7 +315,7 @@ for(let i = 0; i < accountsStark.length; i++){
                                                 else if(project == "zkLend"){
                                                     let procent = getRandomNumber(zkLendClass.procentMin, zkLendClass.procentMax);
                                                     let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
-                                                    let borrow;
+                                                    let borrow = false;
                                                     
                                                         if (zkLendClass.mode === true) {
                                                             borrow = true
@@ -327,7 +325,7 @@ for(let i = 0; i < accountsStark.length; i++){
                                                             }
                                                         }
                                                         if(tokenDeposit !== "ETH"){
-                                                            await randomswap(key, "ETH", tokenDeposit, procent)
+                                                            //await randomswap(key, "ETH", tokenDeposit, procent)
                                                             await zkLend(key, tokenDeposit, 100, borrow)
                                                             await swapAllBalanceToToken(key)
                                                             }   else{
