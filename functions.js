@@ -658,20 +658,20 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     const callDataDeposit = zkLendContract.populate("deposit", [tokenDepositContract.address, amount.low]);
     const callDataenable_collateral = zkLendContract.populate("enable_collateral", [tokenDepositContract.address]);
     console.log(`Making deposit ${(amountConsole(tokenDeposit, amount))} ${tokenDeposit}`)
-    //const tx = await account.execute([callDataApprove, callDataDeposit, callDataenable_collateral]);
-    //console.log(tx.transaction_hash);
-    //const transaction_receipt = await provider.waitForTransaction(tx.transaction_hash);
+    const tx = await account.execute([callDataApprove, callDataDeposit, callDataenable_collateral]);
+    console.log(tx.transaction_hash);
+    const transaction_receipt = await provider.waitForTransaction(tx.transaction_hash);
     let delayAfterTX = getRandomDelay(general.delayAfterTxMin, general.delayAfterTxMax);
-    //await delay(delayAfterTX);
+    await delay(delayAfterTX);
     console.log(`Deposit done✅`)
-    //await delay(120_000)
+    await delay(120_000)
 
 
-    /* if(borrow){
+    if(borrow){
         await zkLendBorrow(key, tokenDeposit);
         await zkLendRepayAll(key, tokenDeposit);
 
-    } */
+    }
 
     const withdrawCallData = zkLendContract.populate("withdraw_all", [tokenDepositContract.address]);
     const txWithdraw = await account.execute(withdrawCallData);
