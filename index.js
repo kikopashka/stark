@@ -131,7 +131,6 @@ for(let i = 0; i < accountsStark.length; i++){
         //let key = starkPrivatemas[i];
         await checkAllBalance(key);
 
-
     }
     
 
@@ -317,15 +316,15 @@ for(let i = 0; i < accountsStark.length; i++){
                                                     let tokenDeposit = ["USDC", "USDT", "WBTC", "DAI", "ETH"][Math.floor(Math.random() * 5)];
                                                     let borrow = false;
                                                     
-                                                        if (zkLendClass.mode === true) {
+                                                        if (zkLendClass.borrow === true) {
                                                             borrow = true
-                                                        } else if (zkLendClass.mode === "random") {
+                                                        } else if (zkLendClass.borrow === "random") {
                                                             if (getRandomNumber(0, 1) === 1) {
                                                                 borrow = true
                                                             }
                                                         }
                                                         if(tokenDeposit !== "ETH"){
-                                                            //await randomswap(key, "ETH", tokenDeposit, procent)
+                                                            await randomswap(key, "ETH", tokenDeposit, procent)
                                                             await zkLend(key, tokenDeposit, 100, borrow)
                                                             await swapAllBalanceToToken(key)
                                                             }   else{
