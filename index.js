@@ -153,7 +153,7 @@ for(let i = 0; i < accountsStark.length; i++){
                 let procent;
                 let number;
                 let swapNumber = getRandomNumber(jediswap.swap_number_min, jediswap.swap_number_max)
-                    for(let i = 0; i <= swapNumber; i++){
+                    for(let i = 0; i < swapNumber; i++){
 
                     if (i === 0) {
                         tokenIn = jediswap.tokenIn;
