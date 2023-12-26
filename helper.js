@@ -31,7 +31,7 @@ return estimate;
 
 
 export async function getArgentAddress(key){
-  const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+  const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
   const targetHash = '0x1a736d6ed154502257f02b1ccdf4d9d1089f80811cd6acad48e6b6a9d1f2003';
   const oldWayAddress = await getArgentAddressOld(key);
   try{
@@ -73,7 +73,7 @@ export async function getArgentAddressNew (key) {
 };
 
 export async function getArgentAddressOld(key){
-        const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+        const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
 
         const argentXproxyClassHash = "0x25ec026985a3bf9d0cc1fe17326b245dfdc3ff89b8fde106542a3ea56c5a918";
         const argentXaccountClassHash = "0x033434ad846cdd5f23eb73ff09fe6fddd568284a0fb7d1be20ee482f044dabe2";
@@ -96,7 +96,7 @@ export async function getArgentAddressOld(key){
 
 
 export async function getAmountTokenStark(walletAddress, tokenAddress, abiAddress) {
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
 
     if (!abiAddress) {
         abiAddress = tokenAddress;
@@ -176,7 +176,7 @@ export function delay(ms) {
 
 
 export async function getAllBalance(accountAddress){
-  const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+  const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
 
   const contractETH = new Contract(abi.erc20token, config.tokens.ETH, provider);
   const contractUSDC = new Contract(abi.erc20token, config.tokens.USDC, provider);
@@ -232,7 +232,7 @@ export async function gasPriceL2(){
 }
 
 export async function getAllLPBalance(accountAddress){
-  const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+  const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
 
   const contractETHUSDC = new Contract(abi.erc20token, config.jediswap.pairsPool.ETHUSDC, provider);
   const contractETHUSDT = new Contract(abi.erc20token, config.jediswap.pairsPool.ETHUSDT, provider);
@@ -267,7 +267,7 @@ export async function getAllLPBalance(accountAddress){
 }
 
 export async function getzkLendbalance(accountAddress){
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
 
     const contractzETH = new Contract(abi.erc20token, config.zkLend.wrappedTokens.ETH, provider);
     const contractzUSDC = new Contract(abi.erc20token, config.zkLend.wrappedTokens.USDC, provider);
