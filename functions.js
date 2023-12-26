@@ -650,7 +650,7 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     const account = new Account(provider, accountAddress, key, "1");
     
     const zkLendContract = new Contract(abi.zkLend, config.zkLend.marketAddress, provider);
-    const tokenDepositContract = new Contract(abi.erc20token, config.tokens["DAI"], provider);
+    const tokenDepositContract = new Contract(abi.erc20token, config.tokens[tokenDeposit], provider);
     const balance = await tokenDepositContract.balanceOf(accountAddress);
     const amount = cairo.uint256((BigInt(procent) * balance.balance.low) /100n)
     const callDataApprove = tokenDepositContract.populate("approve", [config.zkLend.marketAddress, amount]);
