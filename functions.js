@@ -83,7 +83,7 @@ export async function jediswapSwap(key, tokenIn, tokenOut, procent){
         } while(general.gwei < gwei)
     }
         
-        const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+        const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
         const accountAddress = await getArgentAddress(key);
         const account = new Account(provider, accountAddress, key, "1");
 
@@ -143,7 +143,7 @@ export async function myswapSwap(key, tokenIn, tokenOut, procent){
         } while(general.gwei < gwei)
     }
 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
 
@@ -208,7 +208,7 @@ export async function kswapSwap(key, tokenIn, tokenOut, procent){
             await delay(15000);
     } while(general.gwei < gwei)
 }
-     const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+     const provider = new RpcProvider({ nodeUrl: providerSTARK });
      const accountAddress = await getArgentAddress(key);
      const account = new Account(provider, accountAddress, key, "1");
 
@@ -267,7 +267,7 @@ export async function avnuSwap(key, tokenIn, tokenOut, procent){
             await delay(15000);
     } while(general.gwei < gwei)
 }
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
 
@@ -366,7 +366,7 @@ export async function orbiterBridge(evmKey, starkKey, fromNetwork, procent){
 
 export async function argentWalletGenerate(){
 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     //new Argent X account v0.2.3
     const argentXproxyClassHash = "0x25ec026985a3bf9d0cc1fe17326b245dfdc3ff89b8fde106542a3ea56c5a918";
     const argentXaccountClassHash = "0x033434ad846cdd5f23eb73ff09fe6fddd568284a0fb7d1be20ee482f044dabe2";
@@ -406,7 +406,7 @@ export async function argentDeploy(key){
 
 try{
     const accountAddress = await getArgentAddress(key); 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const account = new Account(provider, accountAddress, key, "1");
     const starkKeyPubAX = ec.starkCurve.getStarkKey(key);
     const accountAXsierra = json.parse(fs.readFileSync("./ArgentXaccount030.sierra.json").toString("ascii"));
@@ -447,7 +447,7 @@ export async function dmail(key){
             await delay(15000);
     } while(general.gwei < gwei)
 }
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
 
@@ -502,7 +502,7 @@ export async function jediswapLP(key, procentMin, procentMax){
             await delay(15000);
     } while(general.gwei < gwei)
 }
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
    
@@ -576,7 +576,7 @@ export async function jediswapLPWithdrawAll(key){
     } while(general.gwei < gwei)
     }
 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
     
@@ -645,7 +645,7 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
     } while(general.gwei < gwei)
 }
 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
     
@@ -685,7 +685,7 @@ export async function zkLend(key, tokenDeposit, procent, borrow){
 export async function zkLendBorrow(key, tokenDeposit){
     try{
 
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
     
@@ -720,7 +720,7 @@ export async function zkLendBorrow(key, tokenDeposit){
 }
 export async function zkLendRepayAll(key, tokenDeposit){
     try{
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
     
@@ -771,7 +771,7 @@ export async function starkverseMint(key){
     } while(general.gwei < gwei)
 }
     console.log(`Starting minting NFTs on starkverse`);
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
 
@@ -789,7 +789,7 @@ export async function starkverseMint(key){
 
 export async function swapAllBalanceToToken(key){
     try{
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const accountAddress = await getArgentAddress(key);
     const account = new Account(provider, accountAddress, key, "1");
 
@@ -869,7 +869,7 @@ export async function randomswap(key, tokenIn, tokenOut, procent){
                 await delay(15000);
         } while(general.gwei < gwei)
     }
-        const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+        const provider = new RpcProvider({ nodeUrl: providerSTARK });
         const accountAddress = await getArgentAddress(key);
         const account = new Account(provider, accountAddress, key, "1");
         console.log(`Minting starknet identity`)
@@ -887,7 +887,7 @@ export async function randomswap(key, tokenIn, tokenOut, procent){
 
   export async function checkAllBalance(key){
     const accountAddress = await getArgentAddress(key);
-    const provider = new RpcProvider({ nodeUrl: "https://json-rpc.starknet-mainnet.public.lavanet.xyz" });
+    const provider = new RpcProvider({ nodeUrl: providerSTARK });
     const contractETH = new Contract(abi.erc20token, config.tokens.ETH, provider);
     const balanceETH = await contractETH.balanceOf(accountAddress);
 
