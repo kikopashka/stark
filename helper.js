@@ -46,8 +46,11 @@ export async function getArgentAddress(key){
       return newWayAddress;
         }
       }catch(e){
+        if(e.message == 'Endpoint is deprecated from version 0.12.3.') return oldWayAddress
+        else{
         const address = await getArgentAddressNew(key);
         return address
+        }
       }
     
 }
