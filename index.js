@@ -6,7 +6,6 @@ import _ from "lodash"
 import config from "./config.json" assert { type: "json" };
 
 //-------------------------------------------------------------------------------------------------------\\
-
 const accountsStark = _.shuffle(fs.readFileSync("./privateStark.txt").toString().replace(/\r\n/g,'\n').split('\n'));
 
 const EVMprivateMas = fs.readFileSync("./privateEVM.txt").toString().replace(/\r\n/g,'\n').split('\n');

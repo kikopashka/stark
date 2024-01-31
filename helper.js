@@ -224,8 +224,8 @@ export async function gasPriceL2(){
   try{
   const provider = new Provider({ sequencer: { network: constants.NetworkName.SN_MAIN } });
   const blockInfo = await provider.getBlock('latest');
-  const gwei = ethers.formatUnits(parseInt(blockInfo.gas_price, 16),"gwei")
-  return gwei;
+  const gwei = ethers.formatUnits(parseInt(blockInfo.strk_l1_gas_price, 16),"gwei")
+  return Number(gwei);
   }catch(e){
     await gasPriceL2();
   }

@@ -2,15 +2,15 @@
 //"random" не работает у starkgate, argentGenerate, argentDeployWallet, orbiter
 
 export class general{
-    static delayAfterTxMin = 40           //МИНИМУМ 100!!!
-    static delayAfterTxMax = 70
-    static delayAfterProjectMin = 60
-    static delayAfterProjectMax = 170
-    static providerSTARK = "https://starknet-mainnet.infura.io/v3/8e78eff4b1de4f0680121d689574bcfc"
+    static delayAfterTxMin = 10           //МИНИМУМ 100!!!
+    static delayAfterTxMax = 20
+    static delayAfterProjectMin = 10
+    static delayAfterProjectMax = 10
+    static providerSTARK = "https://star/rpc/v0.5"
     static provider = "https://eth.llamarpc.com"
     static providerARB = "https://arbitrum.llamarpc.com"
     static gweiL1 = 20                               //gwei L1 при котром будут работать функции связанные с EVM сетями
-    static gwei = 27                                 //gwei старка при котором будут работать функции старка
+    static gwei = 0.3                                 //gwei старка при котором будут работать функции старка
 }
 
 export class checkBalance{
@@ -60,27 +60,27 @@ export class jediswap{
 export class myswap{
     static mode = false
     static tokenIn = "ETH"
-    static swap_number_min = 1
-    static swap_number_max = 1
-    static procent_first_swap_min = 40
-    static procent_first_swap_max = 40
+    static swap_number_min = 2
+    static swap_number_max = 2
+    static procent_first_swap_min = 70
+    static procent_first_swap_max = 70
 
 }
 
 export class kswap{
-    static mode = true
+    static mode = false
     static tokenIn = "ETH"
-    static swap_number_min = 1
-    static swap_number_max = 1
-    static procent_first_swap_min = 20
-    static procent_first_swap_max = 30
+    static swap_number_min = 2
+    static swap_number_max = 2
+    static procent_first_swap_min = 70
+    static procent_first_swap_max = 70
 }
 
 export class avnu{
     static mode = false
     static tokenIn = "ETH"
-    static swap_number_min = 1
-    static swap_number_max = 1
+    static swap_number_min = 2
+    static swap_number_max = 2
     static procent_first_swap_min = 60
     static procent_first_swap_max = 70
 }
@@ -88,13 +88,13 @@ export class avnu{
 export class starkkVerse{
     static mode = false   
     static mintsMin = 1
-    static mintsMax = 2
+    static mintsMax = 1
 }
 
 export class dmailClass{
     static mode = false
     static emailToSendMin = 1          //минимальное количество писем
-    static emailToSendMax = 2          //максимальное количество писем
+    static emailToSendMax = 1          //максимальное количество писем
    // static delayMin = 10                 //минимальная задержка 
    // static delayMax = 100                //максимальная задержка
 }
@@ -106,8 +106,8 @@ export class jediLP{
 }
 
 export class zkLendClass{
-    static mode = false                      
-    static borrow = false                   //Если true, то будет ещё занимать/выплачивать
+    static mode = true                      
+    static borrow = true                   //Если true, то будет ещё занимать/выплачивать
     static procentMin = 15                  //минимальный процент от баланса токена для депозита
     static procentMax = 45                  //максимальный процент от баланса токена для депозита
 }

@@ -86,7 +86,6 @@ export async function jediswapSwap(key, tokenIn, tokenOut, procent){
         const provider = new RpcProvider({ nodeUrl: general.providerSTARK });
         const accountAddress = await getArgentAddress(key);
         const account = new Account(provider, accountAddress, key, "1");
-
         const tokenInContract = new Contract(abi.erc20token, config.tokens[tokenIn], provider);
         const balance = await tokenInContract.balanceOf(accountAddress);
         const jediswapContract = new Contract(abi.jediswapRouter, config.jediswap.routerAddress, provider);
